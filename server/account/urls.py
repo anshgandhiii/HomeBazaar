@@ -17,6 +17,11 @@ from .views import ConsumerViewSet,OrderViewSet,ProductViewSet, ClaimRewardView,
 router = DefaultRouter()
 
 router.register(r'consumers', ConsumerViewSet)
+<<<<<<< HEAD
+from .views import ProductViewSet
+
+=======
+>>>>>>> 2b7eaff29604601bb9d276f44df736d082c2752e
 router.register(r'products', ProductViewSet)
 router.register(r'rewards', RewardsViewSet)
 router.register(r'orders', OrderViewSet)
@@ -31,5 +36,8 @@ urlpatterns = [
     path('send-reset-password-email/',SendPasswordResetEmailView.as_view(),name='send-reset-password-email'),
     path('reset-password/<uid>/<token>/',UserPasswordResetView.as_view(),name='reset-password'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh')
+<<<<<<< HEAD
+=======
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+>>>>>>> 2b7eaff29604601bb9d276f44df736d082c2752e
+]

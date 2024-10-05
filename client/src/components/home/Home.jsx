@@ -43,8 +43,8 @@ const ProductCard = ({ product }) => (
     <Link 
       to="/consumer/product" 
       className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full text-center inline-block">
-      Add to Cart
-    </Link>
+      Buy
+  </Link>
 
   </div>
 );
@@ -69,13 +69,15 @@ const RecommendedCategories = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {recommendedCategories.map((category) => (
           <div key={category.id} className="relative overflow-hidden rounded-lg shadow-md group">
-            <img src={category.image} alt={category.name} className="w-full h-48 object-cover transition duration-300 group-hover:scale-110" />
+            <Link to="/consumer/category">
+          <img src={category.image} alt={category.name} className="w-full h-48 object-cover transition duration-300 group-hover:scale-110" />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <h3 className="text-white text-xl font-semibold">{category.name}</h3>
             </div>
             <div className="absolute bottom-4 right-4 bg-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition duration-300">
               <ChevronRight className="w-6 h-6 text-blue-600" />
             </div>
+            </Link>
           </div>
         ))}
       </div>
