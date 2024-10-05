@@ -6,13 +6,13 @@ from .models import Consumer  # Import Consumer model
 # Custom User Admin
 class UserModelAdmin(BaseUserAdmin):
     # Displaying fields in the list view
-    list_display = ["id", "email", "name", "tc", "is_admin", "is_subscribed", "role"]
+    list_display = ["id", "email", "name", "is_admin", "is_subscribed", "role"]
     list_filter = ["is_admin", "is_subscribed", "role"]  # Add role to filter options
 
     # Fields for editing and displaying in the user details view
     fieldsets = [
         ('User Credentials', {"fields": ["email", "password"]}),
-        ("Personal info", {"fields": ["name", "tc", "role"]}),  # Include role here
+        ("Personal info", {"fields": ["name", "role"]}),  # Include role here
         ("Permissions", {"fields": ["is_admin", "is_subscribed"]}),
     ]
 
@@ -22,7 +22,7 @@ class UserModelAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ["wide,"],
-                "fields": ["email", "name", "tc", "role", "password1", "password2"],  # Include role here
+                "fields": ["email", "name", "role", "password1", "password2"],  # Include role here
             },
         ),
     ]

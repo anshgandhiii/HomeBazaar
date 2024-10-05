@@ -4,6 +4,7 @@ import './App.css';
 function Signup() {
   const [role, setRole] = useState('customer'); // Default role
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [tc, setTc] = useState(false);
@@ -19,10 +20,10 @@ function Signup() {
 
     const url = 'http://127.0.0.1:8000/api/user/register/';
     const userData = {
+      name: name,
       email: email,
       password: password,
       password2: password2,
-      tc: tc,
       role: role, // Include role in the request
     };
 
@@ -35,10 +36,10 @@ function Signup() {
         body: JSON.stringify(userData),
       });
 
-      if (!response.ok) {
-        alert("Signup unsuccessful");
-        throw new Error('Network response was not ok');
-      }
+      // if (!response.ok) {
+      //   alert("Signup unsuccessful");
+      //   throw new Error('Network response was not ok');
+      // }
 
       const data = await response.json();
       setSuccessMessage('Registration successful');
@@ -48,6 +49,7 @@ function Signup() {
       // window.location.href="/home";
 
     } catch (error) {
+      console.error('Error:', error);
       setErrorMessage('There was a problem with the signup request');
       console.error('Error:', error);
     } finally {
@@ -84,6 +86,17 @@ function Signup() {
               />
               <span>Seller</span>
             </div>
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700">Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-3 py-1 border rounded-lg"
+              required
+            />
           </div>
 
           {/* Email Field */}
