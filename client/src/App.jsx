@@ -43,8 +43,14 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
+          <Route path="/" element={<Layout />}>
+          <Route path="" element={<Home />} />
+
+           </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          
 
           {/* Seller Routes with Layout */}
           <Route path="/vendor" element={<Layout />}>
@@ -54,17 +60,8 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      
     </div>
-   return (
-    <>
-     <Routes>
-     <Route path="/" element={<Layout />}>
-        <Route path="" element={<Home />} />
-
-      </Route>
-     </Routes>
-    </>
-  );
-}
-
+    )
+   };
 export default App;
