@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.core.exceptions import ValidationError
-import re
 from decimal import Decimal
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None, role=None):
         """
-        Creates and saves a User with the given email, name, tc, role, and password.
+        Creates and saves a User with the given email, name, role, and password.
         """
         if not email:
             raise ValueError("Users must have an email address")
@@ -22,9 +21,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, role=None , password=None):
+    def create_superuser(self, email, name, role=None, password=None):
         """
-        Creates and saves a superuser with the given email, name, tc, and password.
+        Creates and saves a superuser with the given email, name, and password.
         """
         user = self.create_user(
             email=email,
@@ -69,13 +68,14 @@ class User(AbstractBaseUser):
         return self.is_admin or self.is_subscribed
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
+        "Does the user have permissions to view the app app_label?"
         return True
 
     @property
     def is_staff(self):
         "Is the user a member of staff?"
         return self.is_admin
+
 
 class Consumer(models.Model):
     STATE_CHOICES = [
@@ -139,11 +139,13 @@ class Consumer(models.Model):
             self.coins -= amount
             self.save()
         else:
-            raise ValueError("Insufficient coins")
+            raise ValidationError("Insufficient coins")
     
     def save(self, *args, **kwargs):
-        self.clean()
+        if self.user.role != 'consumer':
+            raise ValidationError("Only users with the role 'consumer' can have a consumer profile.")
         super(Consumer, self).save(*args, **kwargs)
+
 
 class Rewards(models.Model):
     STATUS_CHOICES = [
@@ -159,6 +161,7 @@ class Rewards(models.Model):
     def __str__(self):
         return self.name
 
+
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='seller_profile')
     total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
@@ -168,6 +171,12 @@ class Seller(models.Model):
 
     def __str__(self):
         return self.user.email
+
+    def save(self, *args, **kwargs):
+        if self.user.role != 'seller':
+            raise ValidationError("Only users with the role 'seller' can have a seller profile.")
+        super(Seller, self).save(*args, **kwargs)
+
 
 class Product(models.Model):
     CATEGORY_CHOICES = [
@@ -188,8 +197,9 @@ class Product(models.Model):
     offers = models.TextField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
+
 
 class Order(models.Model):
     STATUS_CHOICES = [
@@ -202,7 +212,8 @@ class Order(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    consumer = models.ForeignKey('Consumer', on_delete=models.CASCADE, related_name='orders')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='orders')
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discounted_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
@@ -210,6 +221,10 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         # Calculate total price
+        if not self.pk:  
+            if self.consumer.user.role != 'consumer':
+                raise ValidationError("Only consumers can create orders.")
+            
         if self.discounted_price:
             self.total = self.discounted_price * self.quantity
         else:
@@ -218,6 +233,4 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id} by {self.customer.email}"
-
-
-
+    
