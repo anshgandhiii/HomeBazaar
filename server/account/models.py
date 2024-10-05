@@ -77,16 +77,68 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 class Consumer(models.Model):
+    STATE_CHOICES = [
+        ('Andhra Pradesh', 'Andhra Pradesh'),
+        ('Arunachal Pradesh', 'Arunachal Pradesh'),
+        ('Assam', 'Assam'),
+        ('Bihar', 'Bihar'),
+        ('Chhattisgarh', 'Chhattisgarh'),
+        ('Goa', 'Goa'),
+        ('Gujarat', 'Gujarat'),
+        ('Haryana', 'Haryana'),
+        ('Himachal Pradesh', 'Himachal Pradesh'),
+        ('Jharkhand', 'Jharkhand'),
+        ('Karnataka', 'Karnataka'),
+        ('Kerala', 'Kerala'),
+        ('Madhya Pradesh', 'Madhya Pradesh'),
+        ('Maharashtra', 'Maharashtra'),
+        ('Manipur', 'Manipur'),
+        ('Meghalaya', 'Meghalaya'),
+        ('Mizoram', 'Mizoram'),
+        ('Nagaland', 'Nagaland'),
+        ('Odisha', 'Odisha'),
+        ('Punjab', 'Punjab'),
+        ('Rajasthan', 'Rajasthan'),
+        ('Sikkim', 'Sikkim'),
+        ('Tamil Nadu', 'Tamil Nadu'),
+        ('Telangana', 'Telangana'),
+        ('Tripura', 'Tripura'),
+        ('Uttar Pradesh', 'Uttar Pradesh'),
+        ('Uttarakhand', 'Uttarakhand'),
+        ('West Bengal', 'West Bengal'),
+        ('Andaman and Nicobar Islands', 'Andaman and Nicobar Islands'),
+        ('Chandigarh', 'Chandigarh'),
+        ('Dadra and Nagar Haveli and Daman and Diu', 'Dadra and Nagar Haveli and Daman and Diu'),
+        ('Lakshadweep', 'Lakshadweep'),
+        ('Delhi', 'Delhi'),
+        ('Puducherry', 'Puducherry'),
+        ('Ladakh', 'Ladakh'),
+        ('Jammu and Kashmir', 'Jammu and Kashmir'),
+    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='consumer_profile')
     shipping_address = models.TextField()
+    state = models.CharField(max_length=50, choices=STATE_CHOICES)
     phone_number = models.CharField(max_length=20, unique=True)
     age = models.PositiveIntegerField()  # Added field for age
     gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')])  # Added field for gender
+    coins = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.email
+    
+    def add_coins(self, amount):
+        self.coins += amount
+        self.save()
+
+    # Method to subtract coins from the user's account
+    def subtract_coins(self, amount):
+        if self.coins >= amount:
+            self.coins -= amount
+            self.save()
+        else:
+            raise ValueError("Insufficient coins")
     
     def clean(self):
         phone_regex = re.compile(r'^\+\d{1,2} \d{10}$')  # Allows + followed by 1-2 digits and 10 digits after a space
