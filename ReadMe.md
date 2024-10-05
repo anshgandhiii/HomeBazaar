@@ -5,6 +5,7 @@
 # pip install django-cors-headers
 # pip install django djangorestframework
 # pip install djangorestframework-simplejwt
+# python -m pip install Pillow
 
 
 # .env in project server:

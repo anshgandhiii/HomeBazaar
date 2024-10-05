@@ -96,3 +96,40 @@ class Consumer(models.Model):
     def save(self, *args, **kwargs):
         self.clean()
         super(Consumer, self).save(*args, **kwargs)
+
+class Rewards(models.Model):
+    STATUS_CHOICES = [
+        ('gained', 'Gained'),
+        ('get', 'Get'),
+    ]
+
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='rewards/')
+    coins_required = models.PositiveIntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+
+    def __str__(self):
+        return self.name
+
+class Seller(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='seller_profile')
+    total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    total_orders = models.PositiveIntegerField(default=0)
+    rewards = models.ManyToManyField(Rewards, blank=True)
+    coins = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.user.email
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='products')
+    manufacturer = models.CharField(max_length=255)
+    ingredients = models.TextField()
+    life_span = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    offers = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
