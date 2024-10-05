@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from account.models import User, Consumer,Product, Rewards
+from account.models import User, Consumer,Product,Order,Rewards
 from django.utils.encoding import smart_str,force_bytes,DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -149,6 +149,26 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+# serializers.py
+
+from rest_framework import serializers
+from .models import Order, Product, Consumer
+from django.core.exceptions import ObjectDoesNotExist
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+        read_only_fields = ('consumer', 'status')
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        validated_data['consumer'] = request.user.consumer_profile
+        return super().create(validated_data)
+
+
 
 class RewardsSerializer(serializers.ModelSerializer):
     class Meta:
