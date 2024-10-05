@@ -3,7 +3,7 @@ import { Search, ShoppingCart, User, Menu } from 'lucide-react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const categories = ['Electronics', 'Clothing', 'Home & Kitchen', 'Books', 'Beauty', 'Toys'];
+const categories = ['Handicrafts', 'Food', 'Toys', 'Fashion', 'Accessories', 'Furniture', 'Other'];
 
 const Header = () => (
   <header className="bg-blue-600 text-white p-4">
