@@ -18,8 +18,8 @@ const PieChart = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-        <h2 className='text-lg font-bold mb-4'>Workload status</h2>
+    <div className="bg-dark p-4 rounded-lg shadow-md">
+        <h2 className='text-lg font-bold mb-4 text-primary'>Workload status</h2>
         <div className=' flex items-center justify-center'>
       <div style={{ maxWidth: '250px'}}>
       <Pie data={data} />

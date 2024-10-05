@@ -6,11 +6,11 @@ import PieChart from './PieChart';
 import { BadgePercentIcon } from 'lucide-react';
 
 const DashboardCard = ({ title, value, icon }) => (
-  <div className="p-4 bg-white rounded-lg shadow-md flex items-center">
-    <div className="mr-4 text-blue-500">{icon}</div>
+  <div className="p-4 bg-dark rounded-lg shadow-md flex items-center">
+    <div className="mr-4 text-primary">{icon}</div>
     <div>
-      <div className="text-gray-600 text-sm">{title}</div>
-      <div className="text-2xl font-bold">{value}</div>
+      <div className="text-white text-sm">{title}</div>
+      <div className="text-2xl text-white font-bold">{value}</div>
     </div>
   </div>
 );
@@ -42,7 +42,7 @@ const tasks = [
 const SellerDashboard = () => {
   return (
     <div className="md:ml-[14%] p-4 min-h-screen">
-      <h2 className="pt-4 text-3xl font-bold mb-6">Seller Dashboard</h2>
+      <h2 className="pt-4 text-3xl text-primary font-bold mb-6">Seller Dashboard</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <DashboardCard
@@ -73,14 +73,14 @@ const SellerDashboard = () => {
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4">Assigned Tasks</h3>
+        <div className="bg-dark p-4 rounded-lg shadow-md">
+          <h3 className="text-lg text-primary font-bold mb-4">Assigned Tasks</h3>
           <ul className="space-y-4">
             {tasks.map((task, index) => (
               <li key={index} className="flex justify-between items-center">
                 <div>
-                  <p className="font-semibold">{task.name}</p>
-                  <p className="text-sm text-gray-500">{task.time}</p>
+                  <p className="font-semibold text-white">{task.name}</p>
+                  <p className="text-sm text-white">{task.time}</p>
                 </div>
                 <div className="bg-gray-200 rounded-full h-2 w-24">
                   <div
@@ -92,8 +92,8 @@ const SellerDashboard = () => {
             ))}
           </ul>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4">Product Stock Recommendations</h3>
+        <div className="bg-dark p-4 rounded-lg shadow-md">
+          <h3 className="text-lg font-bold mb-4 text-primary">Product Stock Recommendations</h3>
           <div className="space-y-4">
             {recommendations.map((product, index) => (
               <div key={index} className="flex items-center">
@@ -106,8 +106,8 @@ const SellerDashboard = () => {
                 </div>
                 <div className="w-full">
                   <div className="flex justify-between mb-2">
-                    <p className="font-semibold">{product.name}</p>
-                    <p className="text-sm text-gray-500">{`${product.stock} in stock`}</p>
+                    <p className="font-semibold text-primary">{product.name}</p>
+                    <p className="text-sm text-primary">{`${product.stock} in stock`}</p>
                   </div>
                   <div className="bg-gray-200 rounded-full h-2">
                     <div
@@ -129,8 +129,8 @@ const SellerDashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4">Chats</h3>
+        <div className="bg-dark p-4 rounded-lg shadow-md">
+          <h3 className="text-lg font-bold mb-4 text-primary">Chats</h3>
           <div className="space-y-4">
             <div className="flex items-center p-3 border rounded-lg">
               <img
@@ -139,8 +139,8 @@ const SellerDashboard = () => {
                 alt="User"
               />
               <div>
-                <p className="font-semibold">John Doe</p>
-                <p className="text-sm text-gray-500">Inquiry about product pricing...</p>
+                <p className="font-semibold text-primary">John Doe</p>
+                <p className="text-sm text-white">Inquiry about product pricing...</p>
               </div>
             </div>
             <div className="flex items-center p-3 border rounded-lg">
@@ -150,31 +150,31 @@ const SellerDashboard = () => {
                 alt="User"
               />
               <div>
-                <p className="font-semibold">Jane Smith</p>
-                <p className="text-sm text-gray-500">Requesting restock details...</p>
+                <p className="font-semibold text-primary">Jane Smith</p>
+                <p className="text-sm text-white">Requesting restock details...</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4">Recent Activities</h3>
+        <div className="bg-dark p-4 rounded-lg shadow-md">
+          <h3 className="text-lg font-bold mb-4 text-primary">Recent Activities</h3>
           <ul className="space-y-4">
             <li className="flex justify-between items-center">
               <div>
-                <p className="font-semibold">Restocked Bamboo Toothbrush</p>
-                <p className="text-sm text-gray-500">5 mins ago</p>
+                <p className="font-semibold text-primary">Restocked Bamboo Toothbrush</p>
+                <p className="text-sm text-white">5 mins ago</p>
               </div>
             </li>
             <li className="flex justify-between items-center">
               <div>
-                <p className="font-semibold">Launched Fall Promotion</p>
-                <p className="text-sm text-gray-500">1 hour ago</p>
+                <p className="font-semibold text-primary">Launched Fall Promotion</p>
+                <p className="text-sm text-white">1 hour ago</p>
               </div>
             </li>
             <li className="flex justify-between items-center">
               <div>
-                <p className="font-semibold">Updated product descriptions</p>
-                <p className="text-sm text-gray-500">1 hour ago</p>
+                <p className="font-semibold text-primary">Updated product descriptions</p>
+                <p className="text-sm text-white">1 hour ago</p>
               </div>
             </li>
           </ul>
