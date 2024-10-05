@@ -2,9 +2,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from account.serializers import UserRegistrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer,UserPasswordResetSerializer,ProductSerializer
+from rest_framework import status,viewsets
+from account.serializers import UserRegistrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer,UserPasswordResetSerializer
 from django.contrib.auth import authenticate
 from account.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
+from .models import Consumer
+from .serializers import ConsumerSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from .models import Product
@@ -87,5 +92,14 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
         
+class ConsumerViewSet(viewsets.ModelViewSet):
+    queryset = Consumer.objects.all()
+    serializer_class = ConsumerSerializer
+    permission_classes = [IsAuthenticated]  
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)  
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
 

@@ -55,12 +55,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class ConsumerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumer
-        fields = ['user', 'shipping_address', 'phone_number', 'age', 'gender', 'created_at', 'updated_at']
-        
+        fields = '__all__'
+        read_only_fields = ('coins', 'created_at', 'updated_at')  # Prevent users from directly modifying these fields
+
     def validate_phone_number(self, value):
-        phone_regex = re.compile(r'^\+\d{1,2} \d{10}$')  # Ensures + followed by 1-2 digits and 10 digits after a space
-        if not phone_regex.match(value):
-            raise serializers.ValidationError("Phone number must be in the format '+XX XXXXXXXXXX', where XX is the country code and XXXXXXXXXX is the 10-digit number.")
+        if not value.isdigit():
+            raise serializers.ValidationError("Phone number must contain only digits.")
         return value
 
 
