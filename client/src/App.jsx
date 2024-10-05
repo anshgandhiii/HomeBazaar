@@ -9,6 +9,7 @@ import Layout from './Layout';
 import Home from './components/home/Home';
 import CustomerLayout from './components/CustomerLayout';
 import Freq from './components/home/Freq';
+import Details from './components/Details';
 
 
 
@@ -42,8 +43,9 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<CustomerLayout/>}>
+          <Route path="/consumer" element={<CustomerLayout/>}>
             <Route path="" element={<Home />} />
+            <Route path="details" element={<Details/>} />
 
            </Route>
 
