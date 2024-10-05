@@ -16,6 +16,7 @@ import SellerCustomers from './vendorComponents/SellerCustomers';
 import Details from './components/Details';
 import Product from './components/Product'
 import Rewards from './components/Rewards'
+import SellerAccount from './vendorComponents/SellerAccount';
 
 
 
@@ -72,6 +73,7 @@ function App() {
             <Route path="orders" element={<SellersOrders />} />
             <Route path="sales" element={<SellerSales />} />
             <Route path="customers" element={<SellerCustomers />} />
+            <Route path="account" element={<SellerAccount />} />
           </Route>
         </Routes>
       </Router>

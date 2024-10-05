@@ -56,7 +56,7 @@ const SellerNav = () => {
       </div>
 
       <div className={`w-[85%] text-primary py-4 px-6 rounded-lg transition duration-100 ${path === '/account' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-        <Link to="/account" className='flex justify-start items-center'>
+        <Link to="/vendor/account" className='flex justify-start items-center'>
           <span><User className="h-4 w-4 mr-2" /></span>
           <p className="text-sm font-pop">Account</p>
         </Link>
