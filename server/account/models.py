@@ -140,11 +140,6 @@ class Consumer(models.Model):
         else:
             raise ValueError("Insufficient coins")
     
-    def clean(self):
-        phone_regex = re.compile(r'^\+\d{1,2} \d{10}$')  # Allows + followed by 1-2 digits and 10 digits after a space
-        if not phone_regex.match(self.phone_number):
-            raise ValidationError('Phone number must be in the format "+XX XXXXXXXXXX", where XX is the country code and XXXXXXXXXX is the 10-digit number.')
-
     def save(self, *args, **kwargs):
         self.clean()
         super(Consumer, self).save(*args, **kwargs)
