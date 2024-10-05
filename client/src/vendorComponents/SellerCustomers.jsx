@@ -106,12 +106,6 @@ const SellerCustomers = () => {
         </CSVLink>
       </div>
 
-      {/* Gamification: Reward points display */}
-      <div className="mt-6">
-        <h3 className="text-xl font-bold text-primary">Total Customer Engagement Points</h3>
-        <p className="text-lg text-gray-300">You have earned <span className="text-green-400 font-semibold">320</span> points for excellent customer engagement!</p>
-      </div>
-
       
     </div>
   );
