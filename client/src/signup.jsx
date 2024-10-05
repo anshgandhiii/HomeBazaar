@@ -19,11 +19,11 @@ function Signup() {
 
     const url = 'http://127.0.0.1:8000/api/user/register/';
     const userData = {
-      email: email,
-      password: password,
-      password2: password2,
-      tc: tc,
-      role: role, // Include role in the request
+      email,
+      password,
+      password2,
+      tc,
+      role, // Include role in the request
     };
 
     try {
