@@ -15,3 +15,7 @@
     transform: translate3d(0, 0, 0);
     z-index: -1; /* To keep the gradient in the background */
 }
+
+#root{
+    background-color: black;
+}

@@ -9,6 +9,10 @@ import Layout from './Layout';
 import Home from './components/home/Home';
 import CustomerLayout from './components/CustomerLayout';
 import Freq from './components/home/Freq';
+import SellerProducts from './vendorComponents/SellerProducts';
+import SellersOrders from './vendorComponents/SellerOrders';
+import SellerSales from './vendorComponents/SellerSales';
+import SellerCustomers from './vendorComponents/SellerCustomers';
 
 
 
@@ -38,7 +42,7 @@ function App() {
   // }, [isAuthenticated, userType]);
 
   return (
-    <div className="App">
+    <div className="App bg-black">
       <Router>
         <Routes>
           {/* Public Routes */}
@@ -56,6 +60,10 @@ function App() {
             {/* Nested routes will be rendered inside the Layout */}
             <Route path="home" element={<SellerHome />} />
             <Route path="dashboard" element={<SellerDashboard />} />
+            <Route path="products" element={<SellerProducts />} />
+            <Route path="orders" element={<SellersOrders />} />
+            <Route path="sales" element={<SellerSales />} />
+            <Route path="customers" element={<SellerCustomers />} />
           </Route>
         </Routes>
       </Router>
