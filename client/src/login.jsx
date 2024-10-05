@@ -39,18 +39,21 @@ function Login() {
             alert("Login successful!");
     
             // Store user data in localStorage
-            const userInfo = {
+            console.log(response.token);
+            const token  = {
                 email: data.email,
-                role: data.role  // Store the role in localStorage
+                role: data.role  // Assuming role is 'consumer' or 'other'
             };
             localStorage.setItem('user', JSON.stringify(userInfo));
     
-            // Redirect based on role
-            if (data.role === 'seller') {
-                window.location.href = "/vendor/dashboard";  // Seller's dashboard
-            } else {
-                window.location.href = "/consumer/home";  // Consumer's home page
-            }
+            // Check if profile is complete
+            // if (data.role === 'consumer' && !data.is_profile_complete) {
+            //     // Redirect to profile completion page
+            //     window.location.href = "/consumer/profile";
+            // } else {
+            //     // Redirect to default dashboard
+            //     window.location.href = "/vendor/dashboard";
+            // }
     
         } catch (error) {
             setErrorMessage('There was a problem with the login request');
