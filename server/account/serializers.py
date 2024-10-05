@@ -7,23 +7,39 @@ from account.utils import Util
 import re
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    password2=serializers.CharField(style={'input_type':'password'},write_only=True)
+    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    role = serializers.ChoiceField(choices=[('seller', 'Seller'), ('buyer', 'Buyer')], required=True)  # Add this line
+
     class Meta:
-        model=User
-        fields=['name','email','password','password2','tc']
+        model = User
+        fields = ['name', 'email', 'password', 'password2', 'role']  # Include role in fields
         extra_kwargs = {
             'password': {'write_only': True, 'min_length': 5},
-        }
+        }   
 
     def validate(self, attrs):
-        password=attrs.get('password')
-        password2=attrs.get('password2')
-        if password!=password2:
-            raise serializers.ValidationError({'Password and Confirm Password does not match'})
+        password = attrs.get('password')
+        password2 = attrs.get('password2')
+        
+        if password != password2:
+            raise serializers.ValidationError({'password': 'Password and Confirm Password do not match'})
+        
         return attrs
     
-    def create(self, validate_data):
-        return User.objects.create_user(**validate_data)
+    def create(self, validated_data):
+        # role = validated_data.pop('role')  # Extract role from validated_data
+        # user = User.objects.create_user(**validated_data)  # Create the user without the role first
+        # user.role = role  # Set the user's role
+        # user.save()  # Save the user with the role
+        # return user
+        validated_data.pop('password2')  # Remove password2 as it's not needed for creating the user
+        user = User.objects.create_user(
+            email=validated_data['email'],
+            name=validated_data['name'],
+            role=validated_data['role'],
+            password=validated_data['password']
+        )
+        return user
     
 class UserLoginSerializer(serializers.ModelSerializer):
     email=serializers.EmailField(max_length=255)
