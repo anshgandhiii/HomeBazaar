@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Login from './login';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -6,6 +7,11 @@ import Signup from './signup';
 import SellerDashboard from './vendorComponents/SellerDashboard';
 import SellerHome from './vendorComponents/SellerHome'
 import Layout from './Layout';
+import Layout from './components/Layout';
+import Home from './components/home/Home';
+import Freq from './components/home/Freq';
+
+
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,8 +43,14 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
+          <Route path="/" element={<Layout />}>
+          <Route path="" element={<Home />} />
+
+           </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          
 
           {/* Seller Routes with Layout */}
           <Route path="/vendor" element={<Layout />}>
@@ -48,8 +60,8 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      
     </div>
-  );
-}
-
+    )
+   };
 export default App;

@@ -1,3 +1,7 @@
+# npm i
+# npm install react-router-dom
+
+
 # pip install django-cors-headers
 # pip install django djangorestframework
 # pip install djangorestframework-simplejwt
