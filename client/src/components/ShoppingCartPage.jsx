@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
+import {Link} from 'react-router-dom'
 
 const Button = ({ className, children, ...props }) => (
   <button
@@ -99,11 +100,14 @@ const ShoppingCartPage = () => {
               </div>
             </div>
           </div>
+            
+          <Link to="/consumer/payment">
+            <Button className="w-full mt-8 bg-blue-500 text-white hover:bg-blue-600 text-lg font-semibold py-3 rounded-lg transform transition duration-200 hover:scale-105 flex items-center justify-center">
+                Proceed to Checkout
+                <ArrowRight className="ml-2" size={20} />
+            </Button>
+            </Link>
 
-          <Button className="w-full mt-8 bg-blue-500 text-white hover:bg-blue-600 text-lg font-semibold py-3 rounded-lg transform transition duration-200 hover:scale-105 flex items-center justify-center">
-            Proceed to Checkout
-            <ArrowRight className="ml-2" size={20} />
-          </Button>
         </>
       )}
     </div>

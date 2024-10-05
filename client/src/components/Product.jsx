@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Camera } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -196,19 +197,20 @@ const ProductPage = () => {
             </div>
           </div>
           <div className="flex space-x-4 mb-6">
-            <button
-              className={`flex-1 py-3 px-6 rounded-md text-white font-semibold transition duration-200 ${isAddedToCart ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"}`}
-              onClick={handleAddToCart}
-              disabled={isAddedToCart}
+            <Link to="../cart"
+            className={`flex-1 py-3 px-6 rounded-md text-white font-semibold transition duration-200 ${isAddedToCart ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"}`}
+            onClick={handleAddToCart}
+            disabled={isAddedToCart}
             >
+
               {isAddedToCart ? "Added to Cart" : "Add to Cart"}
-            </button>
-            <button
+            </Link>
+            {/* <button
               className={`py-3 px-6 rounded-md font-semibold transition duration-200 ${isAddedToWishlist ? "bg-red-500 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
               onClick={handleAddToWishlist}
             >
-              {isAddedToWishlist ? "Added to Wishlist" : "Add to Wishlist"}
-            </button>
+              {isAddedToWishlist ? "Bought" : "Buy"}
+            </button> */}
           </div>
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
