@@ -7,13 +7,16 @@ export default function Home() {
   return (
     <div>
       {/* Frequently Bought Items Section */}
-      <Freq />
+      {/* <Freq /> */}
       
       {/* Categories Section */}
-      <div className="flex justify-center my-8">
+      {/* <div className="flex justify-center my-8">
         <Categories />
-      </div>
+      </div> */}
+
+
+      
     </div>
   );
-  <Chatbot></Chatbot>
+  // <Chatbot></Chatbot>
 }
