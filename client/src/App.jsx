@@ -13,6 +13,9 @@ import SellerProducts from './vendorComponents/SellerProducts';
 import SellersOrders from './vendorComponents/SellerOrders';
 import SellerSales from './vendorComponents/SellerSales';
 import SellerCustomers from './vendorComponents/SellerCustomers';
+import Details from './components/Details';
+import Product from './components/Product'
+import Rewards from './components/Rewards'
 
 
 
@@ -46,8 +49,13 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<CustomerLayout/>}>
-            <Route path="" element={<Home />} />
+          <Route path="/consumer" element={<CustomerLayout/>}>
+            <Route path="home" element={<Home />} />
+            <Route path="details" element={<Details/>} />
+            <Route path="rewards" element={<Rewards/>} />
+            {/* <Route path="home" element={<Freq />} /> */}
+            <Route path="product" element={<Product/>}></Route>
+
 
            </Route>
 

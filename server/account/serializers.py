@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from account.models import User, Consumer
+from account.models import User, Consumer,Product
 from django.utils.encoding import smart_str,force_bytes,DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -55,12 +55,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class ConsumerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumer
-        fields = ['user', 'shipping_address', 'phone_number', 'age', 'gender', 'created_at', 'updated_at']
-        
+        fields = '__all__'
+        read_only_fields = ('coins', 'created_at', 'updated_at')  # Prevent users from directly modifying these fields
+
     def validate_phone_number(self, value):
-        phone_regex = re.compile(r'^\+\d{1,2} \d{10}$')  # Ensures + followed by 1-2 digits and 10 digits after a space
-        if not phone_regex.match(value):
-            raise serializers.ValidationError("Phone number must be in the format '+XX XXXXXXXXXX', where XX is the country code and XXXXXXXXXX is the 10-digit number.")
+        if not value.isdigit():
+            raise serializers.ValidationError("Phone number must contain only digits.")
         return value
 
 
@@ -144,3 +144,8 @@ class UserPasswordResetSerializer(serializers.Serializer):
         except DjangoUnicodeDecodeError as identifier:
             PasswordResetTokenGenerator().check_token(user,token)
             raise serializers.ValidationError({'token is invalid'})
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'

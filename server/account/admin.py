@@ -1,7 +1,7 @@
 from django.contrib import admin
 from account.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Consumer  # Import Consumer model
+from .models import Consumer,Order,Product,Seller,Rewards  # Import Consumer model
 
 # Custom User Admin
 class UserModelAdmin(BaseUserAdmin):
@@ -41,3 +41,7 @@ class ConsumerAdmin(admin.ModelAdmin):
     ordering = ['user', 'created_at']
 
 admin.site.register(Consumer, ConsumerAdmin)  # Register Consumer model
+admin.site.register(Order)
+admin.site.register(Product)
+admin.site.register(Rewards)
+admin.site.register(Seller)

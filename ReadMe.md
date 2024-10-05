@@ -1,10 +1,16 @@
 # npm i
 # npm install react-router-dom
+# npm install lucide-react
+# npm install react-360-view
+# npm install @react-three/drei
+# npm install @react-three/fiber
+
 
 
 # pip install django-cors-headers
 # pip install django djangorestframework
 # pip install djangorestframework-simplejwt
+# python -m pip install Pillow
 
 
 # .env in project server:
