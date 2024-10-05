@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 import re
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, name, tc, password=None, role=None):
+    def create_user(self, email, name, password=None, role=None):
         """
         Creates and saves a User with the given email, name, tc, role, and password.
         """
@@ -14,7 +14,6 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             name=name,
-            tc=tc,
             role=role,  # Set the role when creating the user
         )
 
@@ -22,14 +21,13 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, tc, password=None):
+    def create_superuser(self, email, name, role=None , password=None):
         """
         Creates and saves a superuser with the given email, name, tc, and password.
         """
         user = self.create_user(
             email=email,
             name=name,
-            tc=tc,
             password=password,
             role='seller',  # Superusers will default to the seller role
         )
@@ -50,7 +48,6 @@ class User(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=200)
-    tc = models.BooleanField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_subscribed = models.BooleanField(default=False)
@@ -82,7 +79,7 @@ class User(AbstractBaseUser):
 class Consumer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='consumer_profile')
     shipping_address = models.TextField()
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20, unique=True)
     age = models.PositiveIntegerField()  # Added field for age
     gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')])  # Added field for gender
     created_at = models.DateTimeField(auto_now_add=True)
