@@ -1,44 +1,52 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from 'react';
+import { Search, ShoppingCart, User, Menu } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
 
-export default function CustomerLayout() {
-  return (
-    <>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light"><div className="navbar bg-base-100">
-  <div className="flex-1">
-    <a className="btn btn-ghost text-xl">E-Verse</a>
-  </div>
-  <div className="flex-none gap-2">
-    <div className="form-control">
-      <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-    </div>
-    <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-        </div>
+const categories = ['Electronics', 'Clothing', 'Home & Kitchen', 'Books', 'Beauty', 'Toys'];
+
+const Header = () => (
+  <header className="bg-blue-600 text-white p-4">
+    <div className="container mx-auto flex justify-between items-center">
+      <div className="flex items-center">
+        <Menu className="mr-4 cursor-pointer md:hidden" />
+        <h1 className="text-2xl font-bold">MyShop</h1>
       </div>
-      <ul
-        tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+      <div className="hidden md:flex items-center flex-grow mx-4">
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="w-full p-2 rounded text-gray-800"
+        />
+        <Search className="ml-2 cursor-pointer" />
+      </div>
+      <div className="flex items-center">
+        <ShoppingCart className="mr-4 cursor-pointer" />
+        <User className="cursor-pointer" />
+      </div>
+    </div>
+  </header>
+);
+
+const CategoryNav = () => (
+  <nav className="bg-gray-100 p-4">
+    <div className="container mx-auto">
+      <ul className="flex justify-between overflow-x-auto">
+        {categories.map((category) => (
+          <li key={category} className="mx-2 whitespace-nowrap">
+            <a href="#" className="text-gray-700 hover:text-blue-600">{category}</a>
+          </li>
+        ))}
       </ul>
     </div>
-  </div>
-</div></nav>
+  </nav>
+);
 
+const Navbar = () => (
+  <>
+    <Header />
+    <CategoryNav />
 <Outlet></Outlet>
-                                    {/* ends */}                         
-    </>
+  </>
+);
 
-  )
-}
+export default Navbar;
