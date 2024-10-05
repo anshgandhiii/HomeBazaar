@@ -8,7 +8,7 @@ import re
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
-    role = serializers.ChoiceField(choices=[('seller', 'Seller'), ('buyer', 'Buyer')], required=True)  # Add this line
+    role = serializers.ChoiceField(choices=[('seller', 'Seller'), ('consumer', 'Consumer')], required=True)  # Add this line
 
     class Meta:
         model = User

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-export default function Navbar() {
+export default function CustomerLayout() {
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light"><div className="navbar bg-base-100">

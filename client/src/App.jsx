@@ -7,6 +7,7 @@ import SellerDashboard from './vendorComponents/SellerDashboard';
 import SellerHome from './vendorComponents/SellerHome'
 import Layout from './Layout';
 import Home from './components/home/Home';
+import CustomerLayout from './components/CustomerLayout';
 import Freq from './components/home/Freq';
 
 
@@ -41,10 +42,10 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
-          {/* <Route path="/" element={<Layout />}>
-            <Route path="" element={<Home />} /> */}
+          <Route path="/" element={<CustomerLayout/>}>
+            <Route path="" element={<Home />} />
 
-          {/* </Route> */}
+           </Route>
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
