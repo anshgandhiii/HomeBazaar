@@ -9,7 +9,13 @@ import Layout from './Layout';
 import Home from './components/home/Home';
 import CustomerLayout from './components/CustomerLayout';
 import Freq from './components/home/Freq';
+import SellerProducts from './vendorComponents/SellerProducts';
+import SellersOrders from './vendorComponents/SellerOrders';
+import SellerSales from './vendorComponents/SellerSales';
+import SellerCustomers from './vendorComponents/SellerCustomers';
 import Details from './components/Details';
+import Product from './components/Product'
+import Rewards from './components/Rewards'
 
 
 
@@ -39,13 +45,17 @@ function App() {
   // }, [isAuthenticated, userType]);
 
   return (
-    <div className="App">
+    <div className="App bg-black">
       <Router>
         <Routes>
           {/* Public Routes */}
           <Route path="/consumer" element={<CustomerLayout/>}>
-            <Route path="" element={<Home />} />
+            <Route path="home" element={<Home />} />
             <Route path="details" element={<Details/>} />
+            <Route path="rewards" element={<Rewards/>} />
+            {/* <Route path="home" element={<Freq />} /> */}
+            <Route path="product" element={<Product/>}></Route>
+
 
            </Route>
 
@@ -58,6 +68,10 @@ function App() {
             {/* Nested routes will be rendered inside the Layout */}
             <Route path="home" element={<SellerHome />} />
             <Route path="dashboard" element={<SellerDashboard />} />
+            <Route path="products" element={<SellerProducts />} />
+            <Route path="orders" element={<SellersOrders />} />
+            <Route path="sales" element={<SellerSales />} />
+            <Route path="customers" element={<SellerCustomers />} />
           </Route>
         </Routes>
       </Router>

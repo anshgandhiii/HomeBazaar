@@ -28,11 +28,23 @@ const BarChart = () => {
         position: 'top',
       },
     },
+    scales: {
+      x: {
+        grid: {
+          color: '#20232A', // White grid color for the x-axis
+        },
+      },
+      y: {
+        grid: {
+          color: '#20232A', // White grid color for the y-axis
+        },
+      },
+    },
   };
 
   return (
-    <div className="bg-white p-2 px-4 pt-4 rounded-lg shadow-md">
-        <h2 className='text-lg font-bold mb-4'>Tasks by Day of the Week</h2>
+    <div className="bg-dark p-2 px-4 pt-4 rounded-lg shadow-md">
+        <h2 className='text-lg font-bold mb-4 text-primary'>Tasks by Day of the Week</h2>
       <div style={{ height:'300px'}}>
       <Bar data={data} options={options} />
       </div>
