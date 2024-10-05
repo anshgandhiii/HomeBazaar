@@ -45,7 +45,7 @@ function Login() {
             };
             localStorage.setItem('user', JSON.stringify(userInfo));
             // Redirect to home page
-            window.location.href = "/vendor/home";
+            window.location.href = "/vendor/dashboard";
 
         } catch (error) {
             setErrorMessage('There was a problem with the login request');
