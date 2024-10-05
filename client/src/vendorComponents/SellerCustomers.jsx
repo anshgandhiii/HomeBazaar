@@ -2,11 +2,32 @@ import { useState } from 'react';
 import { CSVLink } from 'react-csv';
 
 const SellerCustomers = () => {
-  // Sample data for customers
+  // Sample data for customers and their inquiries
   const [customers, setCustomers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', totalOrders: 15, joined: '2023-01-10' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', totalOrders: 8, joined: '2023-02-14' },
-    { id: 3, name: 'Tom Brown', email: 'tom@example.com', totalOrders: 22, joined: '2022-12-05' },
+    { 
+      id: 1, 
+      name: 'John Doe', 
+      email: 'john@example.com', 
+      totalOrders: 15, 
+      joined: '2023-01-10',
+      inquiries: ['What’s the delivery time?']
+    },
+    { 
+      id: 2, 
+      name: 'Jane Smith', 
+      email: 'jane@example.com', 
+      totalOrders: 8, 
+      joined: '2023-02-14',
+      inquiries: ['Do you have a return policy?']
+    },
+    { 
+      id: 3, 
+      name: 'Tom Brown', 
+      email: 'tom@example.com', 
+      totalOrders: 22, 
+      joined: '2022-12-05',
+      inquiries: ['What payment methods are accepted?']
+    }
     // Add more customer data here...
   ]);
 
@@ -16,7 +37,8 @@ const SellerCustomers = () => {
     { label: 'Name', key: 'name' },
     { label: 'Email', key: 'email' },
     { label: 'Total Orders', key: 'totalOrders' },
-    { label: 'Joined', key: 'joined' }
+    { label: 'Joined', key: 'joined' },
+    { label: 'Inquiries', key: 'inquiries' }
   ];
 
   // Remove a customer
@@ -38,6 +60,7 @@ const SellerCustomers = () => {
               <th className="border text-primary border-gray-300 px-4 py-2">Email</th>
               <th className="border text-primary border-gray-300 px-4 py-2">Total Orders</th>
               <th className="border text-primary border-gray-300 px-4 py-2">Joined</th>
+              <th className="border text-primary border-gray-300 px-4 py-2">Inquiries</th>
               <th className="border text-primary border-gray-300 px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -49,6 +72,14 @@ const SellerCustomers = () => {
                 <td className="border text-primary border-gray-300 px-4 py-2">{customer.email}</td>
                 <td className="border text-primary border-gray-300 px-4 py-2">{customer.totalOrders}</td>
                 <td className="border text-primary border-gray-300 px-4 py-2">{customer.joined}</td>
+                <td className="border text-primary border-gray-300 px-4 py-2">
+                  {/* Display inquiries creatively */}
+                  <ul>
+                    {customer.inquiries.map((inquiry, index) => (
+                      <li key={index} className="text-sm text-white">{`• ${inquiry}`}</li>
+                    ))}
+                  </ul>
+                </td>
                 <td className="border text-primary border-gray-300 px-4 py-2">
                   <button 
                     onClick={() => removeCustomer(customer.id)} 
@@ -74,6 +105,8 @@ const SellerCustomers = () => {
           Export to CSV
         </CSVLink>
       </div>
+
+      
     </div>
   );
 };

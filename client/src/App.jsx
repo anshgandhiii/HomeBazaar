@@ -15,6 +15,8 @@ import SellerSales from './vendorComponents/SellerSales';
 import SellerCustomers from './vendorComponents/SellerCustomers';
 import Details from './components/Details';
 import Product from './components/Product'
+import Rewards from './components/Rewards'
+import SellerAccount from './vendorComponents/SellerAccount';
 import FinalPaymentPage from './components/FinalPaymentPage';
 import ShoppingCartPage from './components/ShoppingCartPage';
 import UserProfilePage from './components/Profile';
@@ -80,6 +82,7 @@ function App() {
             <Route path="orders" element={<SellersOrders />} />
             <Route path="sales" element={<SellerSales />} />
             <Route path="customers" element={<SellerCustomers />} />
+            <Route path="account" element={<SellerAccount />} />
           </Route>
         </Routes>
       </Router>
