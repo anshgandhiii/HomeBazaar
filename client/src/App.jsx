@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Signup from './signup';
 import SellerDashboard from './vendorComponents/SellerDashboard';
 import SellerHome from './vendorComponents/SellerHome'
+import Layout from './Layout';
 
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -34,18 +35,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <div className="App">
         <Routes>
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* Seller Routes */}
-          <Route path="/vendor/home" element={<SellerHome />} />
-          <Route path="/vendor/dashboard" element={<SellerDashboard />} />
+          {/* Seller Routes with Layout */}
+          <Route path="/vendor" element={<Layout />}>
+            {/* Nested routes will be rendered inside the Layout */}
+            <Route path="home" element={<SellerHome />} />
+            <Route path="dashboard" element={<SellerDashboard />} />
+          </Route>
         </Routes>
-      </div>
-    </Router>
+      </Router>
     </div>
   );
 }
