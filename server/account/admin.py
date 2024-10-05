@@ -1,35 +1,43 @@
 from django.contrib import admin
 from account.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-# Register your models here.
+from .models import Consumer  # Import Consumer model
 
-
+# Custom User Admin
 class UserModelAdmin(BaseUserAdmin):
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
-    list_display = ["id","email", "name", "tc","is_admin","is_subscribed"]
-    list_filter = ["is_admin", "is_subscribed"]  
+    # Displaying fields in the list view
+    list_display = ["id", "email", "name", "tc", "is_admin", "is_subscribed", "role"]
+    list_filter = ["is_admin", "is_subscribed", "role"]  # Add role to filter options
+
+    # Fields for editing and displaying in the user details view
     fieldsets = [
         ('User Credentials', {"fields": ["email", "password"]}),
-        ("Personal info", {"fields": ["name", "tc"]}),
+        ("Personal info", {"fields": ["name", "tc", "role"]}),  # Include role here
         ("Permissions", {"fields": ["is_admin", "is_subscribed"]}),
     ]
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
+
+    # Fields when adding a new user
     add_fieldsets = [
         (
             None,
             {
                 "classes": ["wide,"],
-                "fields": ["email", "name","tc", "password1", "password2"],
+                "fields": ["email", "name", "tc", "role", "password1", "password2"],  # Include role here
             },
         ),
     ]
-    search_fields = ["email"]
-    ordering = ["email","id"]
+
+    search_fields = ["email", "role"]  # You can search by role as well
+    ordering = ["email", "id"]
     filter_horizontal = []
 
-
-# Now register the new UserAdmin...
 admin.site.register(User, UserModelAdmin)
+
+# Custom Consumer Admin
+class ConsumerAdmin(admin.ModelAdmin):
+    list_display = ['user', 'age', 'gender', 'phone_number', 'shipping_address', 'created_at', 'updated_at']
+    search_fields = ['user__email', 'phone_number']  # You can search by email or phone number
+    list_filter = ['age', 'gender']  # Filters based on age and gender
+    ordering = ['user', 'created_at']
+
+admin.site.register(Consumer, ConsumerAdmin)  # Register Consumer model
