@@ -33,10 +33,10 @@ const recommendations = [
 const salesGrowth = '15% increase this month';
 const totalSales = 935;
 const tasks = [
-  { name: 'Restock Handmade Soap', time: '2 hours ago', progress: 'Completed' },
-  { name: 'Launch Fall Promotion', time: '1 day ago', progress: 'In Progress' },
-  { name: 'Update Product Descriptions', time: '2 days ago', progress: 'In Progress' },
-  { name: 'Check Inventory Levels', time: '3 days ago', progress: 'Pending' },
+  { name: 'Restock Handmade Soap', time: 'Revenue: $1,500', progress: 'Completed' },
+  { name: 'Launch Fall Promotion', time: 'Revenue: $1,200', progress: 'In Progress' },
+  { name: 'Product Descriptions', time: 'Revenue: $1,000', progress: 'In Progress' },
+  { name: 'Check Inventory Levels', time: 'Revenue: $800', progress: 'Pending' },
 ];
 
 const SellerDashboard = () => {
@@ -46,13 +46,13 @@ const SellerDashboard = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <DashboardCard
-          title="Most Bought Products"
-          value={`${products.length} items`}
-          icon={<MdBarChart className="text-3xl" />}
+          title="Track of Products Sold"
+          value={`${products.length} products`}
+          icon={<MdBarChart className="text-3xl" />} 
         />
         <DashboardCard
-          title="Track of Products Sold"
-          value={`${products.reduce((total, product) => total + product.sold, 0)} sold`}
+          title="Total Revenue"
+          value={`${products.reduce((total, product) => total + product.sold, 0)}00 INR`}
           icon={<MdAttachMoney className="text-3xl" />}
         />
         <DashboardCard
@@ -66,7 +66,7 @@ const SellerDashboard = () => {
           icon={<BadgePercentIcon className="text-3xl" />}
         />
         <DashboardCard
-          title="Total Sales"
+          title="Total Sales this month"
           value={totalSales}
           icon={<MdFileCopy className="text-3xl" />}
         />
@@ -74,7 +74,7 @@ const SellerDashboard = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         <div className="bg-dark p-4 rounded-lg shadow-md">
-          <h3 className="text-lg text-primary font-bold mb-4">Assigned Tasks</h3>
+          <h3 className="text-lg text-primary font-bold mb-4">Top Selling Products</h3>
           <ul className="space-y-4">
             {tasks.map((task, index) => (
               <li key={index} className="flex justify-between items-center">
@@ -93,7 +93,7 @@ const SellerDashboard = () => {
           </ul>
         </div>
         <div className="bg-dark p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4 text-primary">Product Stock Recommendations</h3>
+          <h3 className="text-lg font-bold mb-4 text-primary">Low Stock Alert</h3>
           <div className="space-y-4">
             {recommendations.map((product, index) => (
               <div key={index} className="flex items-center">
@@ -130,7 +130,7 @@ const SellerDashboard = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
         <div className="bg-dark p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4 text-primary">Chats</h3>
+          <h3 className="text-lg font-bold mb-4 text-primary">Recent enquiries by customers</h3>
           <div className="space-y-4">
             <div className="flex items-center p-3 border rounded-lg">
               <img
@@ -157,7 +157,7 @@ const SellerDashboard = () => {
           </div>
         </div>
         <div className="bg-dark p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4 text-primary">Recent Activities</h3>
+          <h3 className="text-lg font-bold mb-4 text-primary">Recent Products added by you</h3>
           <ul className="space-y-4">
             <li className="flex justify-between items-center">
               <div>

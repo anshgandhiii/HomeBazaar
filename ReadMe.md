@@ -3,7 +3,7 @@
 # npm install lucide-react
 # npm install react-360-view
 # npm install @react-three/drei
-# npm install @react-three/fiber
+# npm install @react-three/fiber @use-gesture/react three @react-three/fiber @react-three/drei
 
 
 

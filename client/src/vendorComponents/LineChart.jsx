@@ -80,7 +80,7 @@ const LineChart = () => {
 
   return (
     <div className="bg-dark p-2 px-4 pt-4 rounded-lg shadow-md">
-        <h2 className='text-lg font-bold mb-4 text-primary'>Track of Daily Tasks</h2>
+        <h2 className='text-lg font-bold mb-4 text-primary'>Track of Monthly Sales</h2>
       <div style={{ height:'300px'}}>
       <Line data={data} options={options} />
       </div>
