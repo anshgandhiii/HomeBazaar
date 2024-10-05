@@ -15,7 +15,10 @@ import SellerSales from './vendorComponents/SellerSales';
 import SellerCustomers from './vendorComponents/SellerCustomers';
 import Details from './components/Details';
 import Product from './components/Product'
-import Rewards from './components/Rewards'
+import FinalPaymentPage from './components/FinalPaymentPage';
+import ShoppingCartPage from './components/ShoppingCartPage';
+import UserProfilePage from './components/Profile';
+// import Rewards from './components/Rewards'
 
 
 
@@ -45,16 +48,19 @@ function App() {
   // }, [isAuthenticated, userType]);
 
   return (
-    <div className="App bg-black">
+    <div className="App bg-base">
       <Router>
         <Routes>
           {/* Public Routes */}
           <Route path="/consumer" element={<CustomerLayout/>}>
             <Route path="home" element={<Home />} />
             <Route path="details" element={<Details/>} />
-            <Route path="rewards" element={<Rewards/>} />
+            {/* <Route path="rewards" element={<Rewards/>} /> */}
             {/* <Route path="home" element={<Freq />} /> */}
             <Route path="product" element={<Product/>}></Route>
+            <Route path="payment" element={<FinalPaymentPage/>}></Route>
+            <Route path="cart" element={<ShoppingCartPage/>}></Route>
+            <Route path="profile" element={<UserProfilePage/>}></Route>
 
 
            </Route>
