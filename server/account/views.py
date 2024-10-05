@@ -12,6 +12,8 @@ from .serializers import ConsumerSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError
+from .serializers import ConsumerSerializer,RewardsSerializer
+from .models import Product,Rewards
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -35,18 +37,24 @@ class UserRegistrationView(APIView):
         return Response({"message": "This is the user registration endpoint. Use POST to register."}, status=status.HTTP_200_OK)
     
 class UserLoginView(APIView):
-    def post(self, request,format=None):
-        serializer=UserLoginSerializer(data=request.data)
+    def post(self, request, format=None):
+        serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            email=serializer.data.get('email')
-            password=serializer.data.get('password')
-            user=authenticate(email=email,password=password)
+            email = serializer.data.get('email')
+            password = serializer.data.get('password')
+            user = authenticate(email=email, password=password)
             if user is not None:
-                token=get_tokens_for_user(user)
-                return Response({'token':token,'msg':'Login Success'},status=status.HTTP_200_OK)
+                token = get_tokens_for_user(user)
+                # Add the role to the response
+                return Response({
+                    'token': token,
+                    'role': user.role,  # Include the user's role
+                    'msg': 'Login Success'
+                }, status=status.HTTP_200_OK)
             else:
-                return Response({'errors':{'non_field_errors':['Email or Password is invalid']}},status=status.HTTP_404_NOT_FOUND)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+                return Response({'errors': {'non_field_errors': ['Email or Password is invalid']}}, status=status.HTTP_404_NOT_FOUND)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
@@ -146,3 +154,14 @@ class OrderViewSet(viewsets.ModelViewSet):
             return super().destroy(request, *args, **kwargs)
         else:
             raise ValidationError("You do not have permission to delete this order.")
+class RewardsViewSet(viewsets.ModelViewSet):
+    queryset = Rewards.objects.all()
+    serializer_class = RewardsSerializer
+
+class ClaimRewardView(APIView):
+    def post(self, request):
+        reward_id = request.data.get('rewardId')
+        email = request.data.get('email')
+        # Handle reward claiming logic here
+
+        return Response({'message': 'Reward claimed successfully!'}, status=status.HTTP_200_OK)
