@@ -18,6 +18,7 @@ import Product from './components/Product'
 import FinalPaymentPage from './components/FinalPaymentPage';
 import ShoppingCartPage from './components/ShoppingCartPage';
 import UserProfilePage from './components/Profile';
+import CategoryPage from './components/Category';
 // import Rewards from './components/Rewards'
 
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="payment" element={<FinalPaymentPage/>}></Route>
             <Route path="cart" element={<ShoppingCartPage/>}></Route>
             <Route path="profile" element={<UserProfilePage/>}></Route>
+            <Route path="category" element={<CategoryPage/>}></Route>
 
 
            </Route>
