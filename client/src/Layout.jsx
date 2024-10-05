@@ -5,7 +5,10 @@ import SellerNav from './vendorComponents/SellerNav';
 const Layout = () => {
   return (
     <div>
-      <SellerNav/>
+      {/* user.role-->seller */}
+      {<SellerNav/>}
+      {/* user.role-->customer */}
+      
       <main>
         <Outlet /> {/* This is where the child components will be rendered */}
       </main>
