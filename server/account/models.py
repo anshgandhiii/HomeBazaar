@@ -170,6 +170,15 @@ class Seller(models.Model):
         return self.user.email
 
 class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ('handicrafts', 'Handicrafts'),
+        ('food', 'Food'),
+        ('toys', 'Toys'),
+        ('fashion', 'Fashion'),
+        ('accessories', 'Accessories'),
+        ('furniture', 'Furniture'),
+        ('other', 'Other'),
+    ]
     name = models.CharField(max_length=255)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='products')
     manufacturer = models.CharField(max_length=255)
@@ -177,8 +186,9 @@ class Product(models.Model):
     life_span = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     offers = models.TextField(blank=True, null=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
-    def __str__(self):
+    def _str_(self):
         return self.name
 
 class Order(models.Model):

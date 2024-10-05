@@ -1,10 +1,13 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status,viewsets
 from account.serializers import UserRegistrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer,UserPasswordResetSerializer
 from django.contrib.auth import authenticate
 from account.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
+from .models import Consumer
+from .serializers import ConsumerSerializer
 from rest_framework.permissions import IsAuthenticated
 
 def get_tokens_for_user(user):
@@ -80,5 +83,14 @@ class UserPasswordResetView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
         
+class ConsumerViewSet(viewsets.ModelViewSet):
+    queryset = Consumer.objects.all()
+    serializer_class = ConsumerSerializer
+    permission_classes = [IsAuthenticated]  
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)  
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
 
