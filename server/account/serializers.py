@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from account.models import User, Consumer,Product
+from account.models import User, Consumer,Product, Rewards
 from django.utils.encoding import smart_str,force_bytes,DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -149,3 +149,12 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+class RewardsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rewards
+        fields = ['id', 'name', 'image', 'coins_required', 'status']
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.image.url)
