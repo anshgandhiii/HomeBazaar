@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search, ShoppingCart, User, Menu } from 'lucide-react';
 import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const categories = ['Electronics', 'Clothing', 'Home & Kitchen', 'Books', 'Beauty', 'Toys'];
 
@@ -9,7 +10,9 @@ const Header = () => (
     <div className="container mx-auto flex justify-between items-center">
       <div className="flex items-center">
         <Menu className="mr-4 cursor-pointer md:hidden" />
+        <Link to="home" className="mr-4 cursor-pointer">
         <h1 className="text-2xl font-bold">MyShop</h1>
+      </Link>
       </div>
       <div className="hidden md:flex items-center flex-grow mx-4">
         <input
@@ -20,8 +23,13 @@ const Header = () => (
         <Search className="ml-2 cursor-pointer" />
       </div>
       <div className="flex items-center">
-        <ShoppingCart className="mr-4 cursor-pointer" />
+        
+      <Link to="cart" className="mr-4 cursor-pointer">
+        <ShoppingCart  />
+      </Link>
+      <Link to="profile" className="mr-4 cursor-pointer">
         <User className="cursor-pointer" />
+      </Link>
       </div>
     </div>
   </header>

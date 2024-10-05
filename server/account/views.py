@@ -103,3 +103,30 @@ class ConsumerViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
+
+from rest_framework.decorators import api_view
+from .models import User  # Import the User model
+
+@api_view(['POST'])
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    # Authenticate the user
+    user = authenticate(email=email, password=password)
+
+    if user is not None:
+        # If authentication is successful, fetch the user from the database
+        try:
+            user_data = User.objects.get(email=email)
+            # Return the user's role and other necessary information
+            return Response({
+                'email': user_data.email,
+                'role': user_data.role  # This is the role field from your model
+            })
+        except User.DoesNotExist:
+            return Response({'error': 'User does not exist'}, status=404)
+    else:
+        return Response({'error': 'Invalid credentials'}, status=400)
+
+
