@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 function Signup() {
-  const [role, setRole] = useState('customer'); // Default role
+  const [role, setRole] = useState('consumer'); // Default role
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -69,12 +69,12 @@ function Signup() {
             <div className="flex items-center mb-2">
               <input
                 type="radio"
-                value="customer"
-                checked={role === 'customer'}
-                onChange={() => setRole('customer')}
+                value="consumer"
+                checked={role === 'consumer'}
+                onChange={() => setRole('consumer')}
                 className="mr-2"
               />
-              <span>Customer</span>
+              <span>Consumer</span>
             </div>
             <div className="flex items-center">
               <input
