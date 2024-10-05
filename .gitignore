@@ -87,3 +87,4 @@ Pipfile.lock
 # Virtual environments
 venv/
 .env/
+.venv
