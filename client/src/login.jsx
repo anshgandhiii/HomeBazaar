@@ -12,13 +12,13 @@ function Login() {
         setIsLoading(true);
         setErrorMessage('');
         setSuccessMessage('');
-
+    
         const url = 'http://127.0.0.1:8000/api/user/login/';
         const userData = {
             email,
             password
         };
-
+    
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -27,26 +27,31 @@ function Login() {
                 },
                 body: JSON.stringify(userData),
             });
-
+    
             if (!response.ok) {
                 alert("Login unsuccessful");
                 throw new Error('Network response was not ok');
             }
-
+    
             const data = await response.json();
             setSuccessMessage('Login successful');
             console.log('Login successful:', data);
             alert("Login successful!");
-
+    
             // Store user data in localStorage
             const userInfo = {
                 email: data.email,
-                // role: data.role // Assuming API returns role as 'seller' or 'customer'
+                role: data.role  // Store the role in localStorage
             };
             localStorage.setItem('user', JSON.stringify(userInfo));
-            // Redirect to home page
-            window.location.href = "/vendor/dashboard";
-
+    
+            // Redirect based on role
+            if (data.role === 'seller') {
+                window.location.href = "/vendor/dashboard";  // Seller's dashboard
+            } else {
+                window.location.href = "/consumer/home";  // Consumer's home page
+            }
+    
         } catch (error) {
             setErrorMessage('There was a problem with the login request');
             console.error('Error:', error);
@@ -54,6 +59,7 @@ function Login() {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <div className="gradient-back flex justify-center items-center h-screen">

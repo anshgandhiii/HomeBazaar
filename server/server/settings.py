@@ -177,6 +177,9 @@ SIMPLE_JWT = {
 }
 
 PASSWORD_RESET_TIMEOUT=900
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # CORS settings
 CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins for development
