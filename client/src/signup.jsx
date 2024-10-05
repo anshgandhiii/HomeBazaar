@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import './App.css';
 
 function Signup() {
+  const navigate = useNavigate(); // Initialize the navigate function
   const [role, setRole] = useState('consumer'); // Default role
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -36,22 +38,26 @@ function Signup() {
         body: JSON.stringify(userData),
       });
 
-      // if (!response.ok) {
-      //   alert("Signup unsuccessful");
-      //   throw new Error('Network response was not ok');
-      // }
-
       const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup unsuccessful');
+      }
+
       setSuccessMessage('Registration successful');
       console.log('Registration successful:', data);
       alert("Registration successful!");
-      // Redirect or navigate after successful signup
-      // window.location.href="/home";
+
+      // Redirect based on the role
+      if (role === 'seller') {
+        navigate("/vendor/profile"); // Redirect to seller dashboard
+      } else {
+        navigate("/consumer/profile"); // Redirect to consumer dashboard
+      }
 
     } catch (error) {
       console.error('Error:', error);
-      setErrorMessage('There was a problem with the signup request');
-      console.error('Error:', error);
+      setErrorMessage('There was a problem with the signup request: ' + error.message);
     } finally {
       setIsLoading(false);
     }

@@ -32,4 +32,4 @@ urlpatterns = [
     path('reset-password/<uid>/<token>/',UserPasswordResetView.as_view(),name='reset-password'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-]
+
