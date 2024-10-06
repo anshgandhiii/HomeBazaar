@@ -19,7 +19,7 @@ const Layout = () => {
         <Outlet /> {/* This is where the child components will be rendered */}
       </main>
 
-      <footer className="text-center p-4 bg-base--200 dark:bg-base-800 text-base-content-700 dark:text-base-content-300">
+      <footer className="text-center p-4 bg-base dark:bg-base text-base-content-700 dark:text-base-content-300">
         <p>© 2024 E-commerce Platform</p>
       </footer>
     </div>

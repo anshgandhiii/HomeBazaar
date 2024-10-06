@@ -16,6 +16,18 @@
     z-index: -1; /* To keep the gradient in the background */
 }
 
+.text-primary{
+    color: rgb(2, 192, 192);
+}
+.bg-primary{
+    background-color: rgb(2, 192, 192);
+}
+
+/* .bg-dark{
+   background-color: black; 
+} */
+
 /* #root{
     background-color: black;
 } */
+
