@@ -52,7 +52,7 @@ const SellersOrders = () => {
   };
 
   return (
-    <div className="md:ml-[14%] mx-6 h-screen space-y-4 bg-black p-6 rounded-lg shadow-lg">
+    <div className="md:ml-[14%] mx-6 h-screen space-y-4 bg-base p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold text-primary">Orders</h2>
       {orders.length === 0 ? (
         <p>No orders available.</p>

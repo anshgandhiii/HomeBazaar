@@ -34,11 +34,11 @@ const SellerProfile = () => {
   const progressPercentage = Math.min((rewardPoints / rewardMilestone) * 100, 100);
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-dark shadow-md rounded-lg">
+    <div className="max-w-lg mx-auto p-6 bg-base shadow-md rounded-lg">
       {/* Reward Points Display */}
-      <div className="mb-6 bg-gray-700 p-4 rounded-lg text-white text-center">
+      <div className="mb-6 bg-base-700 p-4 rounded-lg text-white text-center">
         <h2 className="text-xl font-bold">Reward Points: {rewardPoints}</h2>
-        <div className="w-full bg-gray-500 rounded-full h-2 mb-4 mt-2">
+        <div className="w-full bg-base-500 rounded-full h-2 mb-4 mt-2">
           <div
             className="bg-green-500 h-2 rounded-full"
             style={{ width: `${progressPercentage}%` }}
@@ -51,8 +51,8 @@ const SellerProfile = () => {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-dark p-2">
-        <h1 className="text-2xl font-semibold text-white mb-4">Your Profile</h1>
+      <form onSubmit={handleSubmit} className="bg-base p-2">
+        <h1 className="text-2xl font-semibold text-base-content mb-4">Your Profile</h1>
 
         {/* Personal Information */}
         <div className="mb-4">
@@ -65,7 +65,7 @@ const SellerProfile = () => {
             name="name"
             value={profileData.name}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-gray-800"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-base-800"
           />
         </div>
 
@@ -79,7 +79,7 @@ const SellerProfile = () => {
             name="businessName"
             value={profileData.businessName}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-gray-800"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-base-800"
           />
         </div>
 
@@ -93,7 +93,7 @@ const SellerProfile = () => {
             name="email"
             value={profileData.email}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-gray-800"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-base-800"
           />
         </div>
 
@@ -108,7 +108,7 @@ const SellerProfile = () => {
             name="businessLink"
             value={profileData.businessLink}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-gray-800"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-base-800"
           />
         </div>
 
@@ -122,7 +122,7 @@ const SellerProfile = () => {
             name="city"
             value={profileData.city}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-gray-800"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-base-800"
           />
         </div>
 
@@ -136,7 +136,7 @@ const SellerProfile = () => {
             name="state"
             value={profileData.state}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-gray-800"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary bg-base-800"
           />
         </div>
 
@@ -144,7 +144,7 @@ const SellerProfile = () => {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-black hover:bg-gray-700 text-primary font-semibold py-2 px-10 rounded-lg"
+            className="bg-base hover:bg-base-700 text-primary font-semibold py-2 px-10 rounded-lg"
           >
             Save Changes
           </button>

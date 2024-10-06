@@ -46,7 +46,7 @@ const ProductCard = ({ product, onEdit, onDelete }) => (
   <div className="bg-[#20232A] rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
     <div className="relative">
       <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
-      <div className="absolute top-0 right-0 bg-primary text-white px-2 py-1 m-2 rounded-full text-xs font-bold">
+      <div className="absolute top-0 right-0 bg-primary text-base-content px-2 py-1 m-2 rounded-full text-xs font-bold">
         {product.category}
       </div>
     </div>
@@ -54,7 +54,7 @@ const ProductCard = ({ product, onEdit, onDelete }) => (
       <h3 className="text-xl font-semibold text-primary">{product.name}</h3>
       <div className="mt-2 flex justify-between items-center">
         <p className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</p>
-        <p className="text-sm text-gray-600 bg-gray-200 px-2 py-1 rounded-full">Stock: {product.stock}</p>
+        <p className="text-sm text-base-content-600 bg-base-200 px-2 py-1 rounded-full">Stock: {product.stock}</p>
       </div>
       <div className="mt-4 flex justify-end space-x-2">
         <button onClick={() => onEdit(product)} className="text-primary hover:text-gray-600 transition duration-300">
@@ -175,13 +175,13 @@ const ProductForm = ({ product, onSave, onCancel }) => {
       };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-dark p-6 rounded-lg shadow-lg">
+    <form onSubmit={handleSubmit} className="space-y-4 bg-base p-6 rounded-lg shadow-lg">
       <input
         name="name"
         value={formData.name}
         onChange={handleChange}
         placeholder="Product Name"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -190,7 +190,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.price}
         onChange={handleChange}
         placeholder="Price"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -199,7 +199,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.stock}
         onChange={handleChange}
         placeholder="Stock"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -207,7 +207,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.category}
         onChange={handleChange}
         placeholder="Category"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       
@@ -219,7 +219,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         <button 
             type="button" 
             onClick={handleGenerateClickforTitle}
-            className="p-1 text-primary rounded-lg hover:bg-gray-200 transition duration-300"
+            className="p-1 text-primary rounded-lg hover:bg-base-200 transition duration-300"
           >
            {loadingGenforTitle ? 'Generating...' : 'Generate through AI?'}
           </button>
@@ -230,7 +230,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
             value={formData.metaTitle}
             onChange={handleChange}
             placeholder="Meta Tag Title"
-            className="flex-grow p-3 border bg-gray-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="flex-grow p-3 border bg-base-700 border-base-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             maxLength={50}
           />
           
@@ -244,7 +244,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         <button 
             type="button" 
             onClick={handleGenerateClick}
-            className="p-1 text-primary rounded-lg hover:bg-gray-200 transition duration-300"
+            className="p-1 text-primary rounded-lg hover:bg-base-200 transition duration-300"
           >
             {loadingGen ? 'Generating...' : 'Generate through AI?'}
           </button>
@@ -255,7 +255,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
             value={formData.metaDescription}
             onChange={handleChange}
             placeholder="Meta Tag Description"
-            className="flex-grow p-3 border bg-gray-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="flex-grow p-3 border bg-base-700 border-base-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             maxLength={250}
             rows={3}
           />
@@ -271,7 +271,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           value={formData.metaKeywords}
           onChange={handleChange}
           placeholder="Meta Tag Keywords"
-          className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+          className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         />
       </div>
 
@@ -282,7 +282,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           value={formData.metaKeywords}
           onChange={handleChange}
           placeholder="Meta Tag Keywords"
-          className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+          className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         />
       </div>
 
@@ -290,7 +290,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
       <div className="flex justify-end space-x-2">
         <button type="button" onClick={onCancel} className="px-6 py-3 bg-gray-200 text-primary rounded-lg hover:bg-gray-300 transition duration-300">Cancel</button>
-        <button type="submit" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300">Save</button>
+        <button type="submit" className="px-6 py-3 bg-indigo-600 text-base rounded-lg hover:bg-indigo-700 transition duration-300">Save</button>
       </div>
     </form>
   );
@@ -330,7 +330,7 @@ const SellerProducts = () => {
   };
 
   return (
-    <div className="md:ml-[14%] bg-black min-h-screen">
+    <div className="md:ml-[14%] bg-base min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-primary flex items-center">
           <Package className="mr-4" size={36} />
@@ -340,7 +340,7 @@ const SellerProducts = () => {
           <ProductForm product={currentProduct} onSave={handleSave} onCancel={() => setIsEditing(false)} />
         ) : (
           <>
-            <button onClick={handleAddNew} className="mb-8 flex items-center text-primary px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md">
+            <button onClick={handleAddNew} className="mb-8 flex items-center text-primary px-6 py-3 rounded-lg hover:bg-base-600 transition duration-300 shadow-md">
               <Plus size={24} className="mr-2" /> Add New Product
             </button>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

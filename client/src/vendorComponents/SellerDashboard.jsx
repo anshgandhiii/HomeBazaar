@@ -6,11 +6,11 @@ import PieChart from './PieChart';
 import { BadgePercentIcon } from 'lucide-react';
 
 const DashboardCard = ({ title, value, icon }) => (
-  <div className="p-4 bg-dark rounded-lg shadow-md flex items-center">
+  <div className="p-4 bg-base rounded-lg shadow-md flex items-center">
     <div className="mr-4 text-primary">{icon}</div>
     <div>
-      <div className="text-white text-sm">{title}</div>
-      <div className="text-2xl text-white font-bold">{value}</div>
+      <div className="text-base-content text-sm">{title}</div>
+      <div className="text-2xl text-base-content font-bold">{value}</div>
     </div>
   </div>
 );
@@ -79,10 +79,10 @@ const SellerDashboard = () => {
             {tasks.map((task, index) => (
               <li key={index} className="flex justify-between items-center">
                 <div>
-                  <p className="font-semibold text-white">{task.name}</p>
-                  <p className="text-sm text-white">{task.time}</p>
+                  <p className="font-semibold text-base-content">{task.name}</p>
+                  <p className="text-sm text-base-content">{task.time}</p>
                 </div>
-                <div className="bg-gray-200 rounded-full h-2 w-24">
+                <div className="bg-base-200 rounded-full h-2 w-24">
                   <div
                     className={`h-2 rounded-full ${task.progress === 'Completed' ? 'bg-green-500' : task.progress === 'In Progress' ? 'bg-yellow-500' : 'bg-red-500'}`}
                     style={{ width: task.progress === 'Completed' ? '100%' : task.progress === 'In Progress' ? '50%' : '25%' }}
@@ -92,7 +92,7 @@ const SellerDashboard = () => {
             ))}
           </ul>
         </div>
-        <div className="bg-dark p-4 rounded-lg shadow-md">
+        <div className="bg-base p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-bold mb-4 text-primary">Low Stock Alert</h3>
           <div className="space-y-4">
             {recommendations.map((product, index) => (
@@ -129,7 +129,7 @@ const SellerDashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-        <div className="bg-dark p-4 rounded-lg shadow-md">
+        <div className="bg-base p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-bold mb-4 text-primary">Recent enquiries by customers</h3>
           <div className="space-y-4">
             <div className="flex items-center p-3 border rounded-lg">
@@ -140,7 +140,7 @@ const SellerDashboard = () => {
               />
               <div>
                 <p className="font-semibold text-primary">John Doe</p>
-                <p className="text-sm text-white">Inquiry about product pricing...</p>
+                <p className="text-sm text-base-content">Inquiry about product pricing...</p>
               </div>
             </div>
             <div className="flex items-center p-3 border rounded-lg">
@@ -151,7 +151,7 @@ const SellerDashboard = () => {
               />
               <div>
                 <p className="font-semibold text-primary">Jane Smith</p>
-                <p className="text-sm text-white">Requesting restock details...</p>
+                <p className="text-sm text-base-content">Requesting restock details...</p>
               </div>
             </div>
           </div>
@@ -162,19 +162,19 @@ const SellerDashboard = () => {
             <li className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-primary">Restocked Bamboo Toothbrush</p>
-                <p className="text-sm text-white">5 mins ago</p>
+                <p className="text-sm text-base-content">5 mins ago</p>
               </div>
             </li>
             <li className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-primary">Launched Fall Promotion</p>
-                <p className="text-sm text-white">1 hour ago</p>
+                <p className="text-sm text-base-content">1 hour ago</p>
               </div>
             </li>
             <li className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-primary">Updated product descriptions</p>
-                <p className="text-sm text-white">1 hour ago</p>
+                <p className="text-sm text-base-content">1 hour ago</p>
               </div>
             </li>
           </ul>
