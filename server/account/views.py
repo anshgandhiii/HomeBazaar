@@ -1,10 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from account.serializers import UserRegistrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer,UserPasswordResetSerializer,ProductSerializer,OrderSerializer
+from account.serializers import UserRegistrationSerializer,UserLoginSerializer,UserProfileSerializer,UserChangePasswordSerializer,SendPasswordResetEmailSerializer,UserPasswordResetSerializer,ProductSerializer
 from rest_framework import status,viewsets
 from django.contrib.auth import authenticate
 from account.renderers import UserRenderer
+from rest_framework import serializers
+
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .models import Consumer,Order,Product
@@ -75,7 +77,7 @@ class UserLoginView(APIView):
     
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         serializer = UserProfileSerializer(request.user)
@@ -113,13 +115,12 @@ class UserPasswordResetView(APIView):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
         
 class ConsumerViewSet(viewsets.ModelViewSet):
     queryset = Consumer.objects.all()
     serializer_class = ConsumerSerializer
-    permission_classes = [IsAuthenticated]  
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)  
@@ -127,50 +128,6 @@ class ConsumerViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all() 
-    serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        user = self.request.user
-        if user.role == 'consumer':
-            return Order.objects.filter(consumer=user.consumer_profile)
-        elif user.role == 'seller':
-            return Order.objects.filter(product__seller=user.seller_profile)
-        else:
-            raise ValidationError("Invalid role for accessing orders.")
-
-    def perform_create(self, serializer):
-        user = self.request.user
-        print(f"User role: {user.role}")
-        print(f"User email: {user.email}")
-        print(f"Has consumer profile: {hasattr(user, 'consumer_profile')}")
-        
-        if user.role != 'consumer':
-            raise ValidationError(f"Only consumers can create orders. Current role: {user.role}")
-        
-        if not hasattr(user, 'consumer_profile'):
-            raise ValidationError("User does not have a consumer profile")
-        
-        serializer.save(consumer=user.consumer_profile)
-    
-    def update(self, request, *args, **kwargs):
-        user = self.request.user
-        order = self.get_object()
-        if user.role == 'seller' and order.product.seller == user.seller_profile:
-            return super().update(request, *args, **kwargs)
-        else:
-            raise ValidationError("You do not have permission to update this order.")
-
-    def destroy(self, request, *args, **kwargs):
-        user = self.request.user
-        order = self.get_object()
-        if user.role == 'seller' and order.product.seller == user.seller_profile:
-            return super().destroy(request, *args, **kwargs)
-        else:
-            raise ValidationError("You do not have permission to delete this order.")
-        
 class RewardsViewSet(viewsets.ModelViewSet):
     queryset = Rewards.objects.all()
     serializer_class = RewardsSerializer

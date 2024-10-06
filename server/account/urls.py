@@ -12,14 +12,12 @@ from account.views import (
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter
-from .views import ConsumerViewSet,OrderViewSet,ProductViewSet, ClaimRewardView, RewardsViewSet
+from .views import ConsumerViewSet,ProductViewSet, ClaimRewardView, RewardsViewSet
 
 router = DefaultRouter()
-
 router.register(r'consumers', ConsumerViewSet)
 router.register(r'products', ProductViewSet)
 router.register(r'rewards', RewardsViewSet)
-router.register(r'orders', OrderViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

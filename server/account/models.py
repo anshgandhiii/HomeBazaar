@@ -78,47 +78,8 @@ class User(AbstractBaseUser):
 
 
 class Consumer(models.Model):
-    STATE_CHOICES = [
-        ('Andhra Pradesh', 'Andhra Pradesh'),
-        ('Arunachal Pradesh', 'Arunachal Pradesh'),
-        ('Assam', 'Assam'),
-        ('Bihar', 'Bihar'),
-        ('Chhattisgarh', 'Chhattisgarh'),
-        ('Goa', 'Goa'),
-        ('Gujarat', 'Gujarat'),
-        ('Haryana', 'Haryana'),
-        ('Himachal Pradesh', 'Himachal Pradesh'),
-        ('Jharkhand', 'Jharkhand'),
-        ('Karnataka', 'Karnataka'),
-        ('Kerala', 'Kerala'),
-        ('Madhya Pradesh', 'Madhya Pradesh'),
-        ('Maharashtra', 'Maharashtra'),
-        ('Manipur', 'Manipur'),
-        ('Meghalaya', 'Meghalaya'),
-        ('Mizoram', 'Mizoram'),
-        ('Nagaland', 'Nagaland'),
-        ('Odisha', 'Odisha'),
-        ('Punjab', 'Punjab'),
-        ('Rajasthan', 'Rajasthan'),
-        ('Sikkim', 'Sikkim'),
-        ('Tamil Nadu', 'Tamil Nadu'),
-        ('Telangana', 'Telangana'),
-        ('Tripura', 'Tripura'),
-        ('Uttar Pradesh', 'Uttar Pradesh'),
-        ('Uttarakhand', 'Uttarakhand'),
-        ('West Bengal', 'West Bengal'),
-        ('Andaman and Nicobar Islands', 'Andaman and Nicobar Islands'),
-        ('Chandigarh', 'Chandigarh'),
-        ('Dadra and Nagar Haveli and Daman and Diu', 'Dadra and Nagar Haveli and Daman and Diu'),
-        ('Lakshadweep', 'Lakshadweep'),
-        ('Delhi', 'Delhi'),
-        ('Puducherry', 'Puducherry'),
-        ('Ladakh', 'Ladakh'),
-        ('Jammu and Kashmir', 'Jammu and Kashmir'),
-    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='consumer_profile')
     shipping_address = models.TextField()
-    state = models.CharField(max_length=50, choices=STATE_CHOICES)
     phone_number = models.CharField(max_length=20, unique=True)
     age = models.PositiveIntegerField()  # Added field for age
     gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')])  # Added field for gender
@@ -177,6 +138,11 @@ class Seller(models.Model):
             raise ValidationError("Only users with the role 'seller' can have a seller profile.")
         super(Seller, self).save(*args, **kwargs)
 
+    def update_sales(self, total_price):
+        """Update seller's total earnings and total orders."""
+        self.total_earnings += total_price
+        self.total_orders += 1
+        self.save()
 
 class Product(models.Model):
     CATEGORY_CHOICES = [
@@ -234,3 +200,26 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} by {self.customer.email}"
     
+
+class Order(models.Model):
+    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE, related_name='orders')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def __str__(self):
+        return f"Order #{self.id} by {self.consumer.user.email}"
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def save(self, *args, **kwargs):
+        # Calculate price based on product price and quantity
+        self.price = self.product.price * self.quantity
+        super(OrderItem, self).save(*args, **kwargs)
+        # Update the seller's sales record
+        self.product.seller.update_sales(self.price)
