@@ -22,6 +22,7 @@ import ShoppingCartPage from './components/ShoppingCartPage';
 import UserProfilePage from './components/Profile';
 import CategoryPage from './components/Category';
 import AR from './components/AR';
+import Landingpage from './LandingPage';
 import Landingpage from './Landingpage';
 import HandicraftsPage from './components/HandicraftsPage';
 // import Rewards from './components/Rewards'
