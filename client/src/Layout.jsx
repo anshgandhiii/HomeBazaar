@@ -9,11 +9,11 @@ const Layout = () => {
       {/* User role-specific navigation */}
       {<SellerNav />}
       {/* You can add a different nav for customers as needed */}
-
-      {/* Theme toggler component */}
-      <div className="flex justify-end p-4 bg-gray-100 dark:bg-gray-900">
+      <div className="flex justify-end p-4 bg-base-100 dark:bg-base-900">
         <ThemeToggler />
       </div>
+      {/* Theme toggler component */}
+      
 
       <main>
         <Outlet /> {/* This is where the child components will be rendered */}
