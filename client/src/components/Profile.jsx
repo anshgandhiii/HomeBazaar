@@ -123,10 +123,15 @@ const UserProfilePage = () => {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-base rounded-xl shadow-lg">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-base-content-800">User Profile</h1>
-        <Button onClick={isEditing ? saveUserData : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
+        {/* <h1 className="text-3xl font-bold text-base-content-800">User Profile</h1> */}
+        {/* <Button onClick={isEditing ? saveUserData : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
           {isEditing ? 'Save Changes' : 'Edit Profile'}
-        </Button>
+        </Button> */}
+        <h1 className="text-3xl font-bold text-white-800">User Profile</h1>
+        <Button onClick={isEditing ? saveChanges : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
+  {isEditing ? 'Save Changes' : 'Edit Profile'}
+</Button>  {/* Ensure this is properly closed */}
+
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

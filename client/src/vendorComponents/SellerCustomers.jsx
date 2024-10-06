@@ -47,43 +47,43 @@ const SellerCustomers = () => {
   };
 
   return (
-    <div className="md:ml-[14%] h-screen mx-4 bg-black p-6 rounded-lg shadow-lg space-y-6">
-      <h2 className="text-2xl font-bold text-primary">Customer Management</h2>
+    <div className="md:ml-[14%] h-screen mx-4 bg-base p-6 rounded-lg shadow-lg space-y-6">
+      <h2 className="text-2xl font-bold text-primary ">Customer Management</h2>
 
       {/* Table of customers */}
       <div className="overflow-x-auto">
-        <table className="w-full table-auto border-collapse border border-gray-300">
+        <table className="w-full table-auto bg-base border-collapse border border-base-content-300">
           <thead>
-            <tr className="bg-dark">
-              <th className="border text-primary border-gray-300 px-4 py-2">ID</th>
-              <th className="border text-primary border-gray-300 px-4 py-2">Name</th>
-              <th className="border text-primary border-gray-300 px-4 py-2">Email</th>
-              <th className="border text-primary border-gray-300 px-4 py-2">Total Orders</th>
-              <th className="border text-primary border-gray-300 px-4 py-2">Joined</th>
-              <th className="border text-primary border-gray-300 px-4 py-2">Inquiries</th>
-              <th className="border text-primary border-gray-300 px-4 py-2">Actions</th>
+            <tr className="bg-base">
+              <th className="border text-primary border-base-content-300 px-4 py-2">ID</th>
+              <th className="border text-primary border-base-content-300 px-4 py-2">Name</th>
+              <th className="border text-primary border-base-content-300 px-4 py-2">Email</th>
+              <th className="border text-primary border-base-content-300 px-4 py-2">Total Orders</th>
+              <th className="border text-primary border-base-content-300 px-4 py-2">Joined</th>
+              <th className="border text-primary border-base-content-300 px-4 py-2">Inquiries</th>
+              <th className="border text-primary border-base-content-300 px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {customers.map(customer => (
               <tr key={customer.id} className="text-center">
-                <td className="border text-primary border-gray-300 px-4 py-2">{customer.id}</td>
-                <td className="border text-primary border-gray-300 px-4 py-2">{customer.name}</td>
-                <td className="border text-primary border-gray-300 px-4 py-2">{customer.email}</td>
-                <td className="border text-primary border-gray-300 px-4 py-2">{customer.totalOrders}</td>
-                <td className="border text-primary border-gray-300 px-4 py-2">{customer.joined}</td>
-                <td className="border text-primary border-gray-300 px-4 py-2">
+                <td className="border text-primary border-base-content-300 px-4 py-2">{customer.id}</td>
+                <td className="border text-primary border-base-content-300 px-4 py-2">{customer.name}</td>
+                <td className="border text-primary border-base-content-300 px-4 py-2">{customer.email}</td>
+                <td className="border text-primary border-base-content-300 px-4 py-2">{customer.totalOrders}</td>
+                <td className="border text-primary border-base-content-300 px-4 py-2">{customer.joined}</td>
+                <td className="border text-primary border-base-content-300 px-4 py-2">
                   {/* Display inquiries creatively */}
                   <ul>
                     {customer.inquiries.map((inquiry, index) => (
-                      <li key={index} className="text-sm text-white">{`• ${inquiry}`}</li>
+                      <li key={index} className="text-sm text-base-content">{`• ${inquiry}`}</li>
                     ))}
                   </ul>
                 </td>
-                <td className="border text-primary border-gray-300 px-4 py-2">
+                <td className="border text-primary border-base-content-300 px-4 py-2">
                   <button 
                     onClick={() => removeCustomer(customer.id)} 
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    className="px-3 py-1 bg-red-500 text-base-content rounded hover:bg-red-600"
                   >
                     Delete
                   </button>
@@ -100,7 +100,7 @@ const SellerCustomers = () => {
           data={customers} 
           headers={csvHeaders} 
           filename={"customers-data.csv"}
-          className="px-4 py-2 bg-dark text-white rounded-lg hover:bg-indigo-700 transition duration-300"
+          className="px-4 py-2 bg-dark text-base-content rounded-lg hover:bg-indigo-700 transition duration-300"
         >
           Export to CSV
         </CSVLink>

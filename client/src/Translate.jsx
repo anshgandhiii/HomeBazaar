@@ -99,15 +99,16 @@ const Translate = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Translation Page</h1>
+      <h1 className="text-3xl text-base-content font-bold mb-6">Translation Page</h1>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Source Language
+        <label className="block text-sm font-medium border-base-content text-base-content-700 mb-2">
+        <h6 className="text-sm text-base-content font-bold mb-6">Source language</h6>
+
         </label>
         <select
           value={sourceLang}
           onChange={(e) => setSourceLang(e.target.value)}
-          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-10 py-2 text-base-content border-base-content-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
           {languages.map((lang) => (
             <option key={lang.code} value={lang.code}>
@@ -117,13 +118,13 @@ const Translate = () => {
         </select>
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Target Language
+        <label className="block text-sm font-medium text-base-content-700 mb-2">
+          <h6 className="text-sm text-base-content font-bold mb-6">Target language</h6>
         </label>
         <select
           value={targetLang}
           onChange={(e) => setTargetLang(e.target.value)}
-          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-10 py-2 text-base-content border-base-content focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         >
           {languages.map((lang) => (
             <option key={lang.code} value={lang.code}>
@@ -133,14 +134,14 @@ const Translate = () => {
         </select>
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-base-content-700 mb-2">
           Enter text to translate
         </label>
         <div className="relative">
           <textarea
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            className="mt-1 block w-full sm:text-sm border border-gray-300 rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10"
+            className="mt-1 block w-full sm:text-sm border border-base-content-300 rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10"
             rows="4"
           ></textarea>
           <button
@@ -166,7 +167,7 @@ const Translate = () => {
       {outputText && (
         <div className="mt-4">
           <h2 className="text-xl font-semibold mb-2">Translation Result:</h2>
-          <p className="border border-gray-300 rounded-md p-2">{outputText}</p>
+          <p className="border border-base-content-300 rounded-md p-2">{outputText}</p>
         </div>
       )}
     </div>

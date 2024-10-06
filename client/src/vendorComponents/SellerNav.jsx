@@ -13,12 +13,12 @@ const SellerNav = () => {
   };
 
   return (
-    <nav className="hidden md:flex w-[14%] flex-col justify-between items-center h-screen fixed left-0 bg-dark shadow-lg pt-6 pb-3">
+    <nav className="hidden md:flex w-[14%] flex-col justify-between items-center h-screen fixed left-0 bg-base-100 shadow-lg py-4 dark:bg-base-200">
       {/* Logo and Brand */}
-      <Link to="/" className="flex space-x-2 items-center">
+      <Link to="/" className="flex space-x-2 items-center mb-6">
         <div className="flex flex-col justify-center space-y-[-6px]">
-          <div className="flex">
-            <span><Atom className='h-6 text-primary mr-2' /></span>
+          <div className="flex items-center">
+            <Atom className='h-6 text-primary mr-2' />
             <h1 className="text-xl font-semibold font-pop text-primary mb-1 text-center">MarketNest</h1>
           </div>
         </div>
@@ -26,58 +26,23 @@ const SellerNav = () => {
 
       {/* Navigation Links */}
       <div className="flex flex-col items-center space-y-2 w-[100%] mb-20">
-        <div className={`w-[85%] text-primary py-2 px-4 rounded-lg transition duration-100 ${path === '/vendor/home' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-          <Link to="/vendor/dashboard" className='flex justify-start items-center'>
-            <span><Home className="h-4 w-4 mr-2" /></span>
-            <p className="text-sm font-pop">Dashboard</p>
-          </Link>
-        </div>
-
-        <div className={`w-[85%] text-primary py-2 px-4 rounded-lg transition duration-100 ${path === '/tasks' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-          <Link to="/vendor/products" className='flex justify-start items-center'>
-            <span><NotebookIcon className="h-4 w-4 mr-2" /></span>
-            <p className="text-sm font-pop">Products</p>
-          </Link>
-        </div>
-
-        <div className={`w-[85%] text-primary py-2 px-4 rounded-lg transition duration-100 ${path === '/projects' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-          <Link to="/vendor/orders" className='flex justify-start items-center'>
-            <span><Folder className="h-4 w-4 mr-2" /></span>
-            <p className="text-sm font-pop">Track Orders</p>
-          </Link>
-        </div>
-
-        <div className={`w-[85%] text-primary py-2 px-4 rounded-lg transition duration-100 ${path === '/resources' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-          <Link to="/vendor/sales" className='flex justify-start items-center'>
-            <span><FileText className="h-4 w-4 mr-2" /></span>
-            <p className="text-sm font-pop">Marketing</p>
-          </Link>
-        </div>
-
-        <div className={`w-[85%] text-primary py-2 px-4 rounded-lg transition duration-100 ${path === '/reports' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-          <Link to="/vendor/customers" className='flex justify-start items-center'>
-            <span><BarChart className="h-4 w-4 mr-2" /></span>
-            <p className="text-sm font-pop">Customers</p>
-          </Link>
-        </div>
+        <NavItem to="/vendor/dashboard" icon={<Home className="h-4 w-4 mr-2" />} text="Dashboard" currentPath={path} />
+        <NavItem to="/vendor/products" icon={<NotebookIcon className="h-4 w-4 mr-2" />} text="Products" currentPath={path} />
+        <NavItem to="/vendor/orders" icon={<Folder className="h-4 w-4 mr-2" />} text="Track Orders" currentPath={path} />
+        <NavItem to="/vendor/sales" icon={<FileText className="h-4 w-4 mr-2" />} text="Marketing" currentPath={path} />
+        <NavItem to="/vendor/customers" icon={<BarChart className="h-4 w-4 mr-2" />} text="Customers" currentPath={path} />
 
         {/* Translate Button */}
-        <div className={`w-[85%] text-primary py-2 px-4 rounded-lg transition duration-100 hover:bg-gray-700 hover:font-semibold`}>
-          <button onClick={toggleModal} className='flex justify-start items-center w-full'>
-            {/* <span><Translate className="h-4 w-4 mr-2" /></span> */}
-            <span><BinocularsIcon className="h-4 w-4 mr-2" /></span>
+        <div className="w-[85%] py-2 px-4 rounded-lg transition duration-100 hover:bg-base-300 hover:font-semibold dark:hover:bg-base-700">
+          <button onClick={toggleModal} className='flex justify-start items-center w-full text-gray-700 dark:text-gray-200'>
+            <BinocularsIcon className="h-4 w-4 mr-2" />
             <p className="text-sm font-pop">Translate</p>
           </button>
         </div>
       </div>
 
       {/* Account Link */}
-      <div className={`w-[85%] text-primary py-4 px-6 rounded-lg transition duration-100 ${path === '/account' ? 'bg-primary text-white' : 'hover:bg-gray-700 hover:font-semibold'}`}>
-        <Link to="/vendor/account" className='flex justify-start items-center'>
-          <span><User className="h-4 w-4 mr-2" /></span>
-          <p className="text-sm font-pop">Account</p>
-        </Link>
-      </div>
+      <NavItem to="/vendor/account" icon={<User className="h-4 w-4 mr-2" />} text="Account" currentPath={path} />
 
       {/* Modal */}
       {isModalOpen && (
@@ -86,7 +51,6 @@ const SellerNav = () => {
             <div className="modal-box relative">
               <button onClick={toggleModal} className="absolute right-2 top-2 btn btn-sm btn-circle">✕</button>
               <h2 className="text-lg font-bold">Translation</h2>
-              {/* Render the Translate component inside the modal */}
               <Translate />
             </div>
           </div>
@@ -95,5 +59,24 @@ const SellerNav = () => {
     </nav>
   );
 };
+
+const NavItem = ({ to, icon, text, currentPath }) => (
+  <div className={`w-[85%] py-2 px-4 rounded-lg transition duration-100 ${
+    currentPath === to 
+      ? 'bg-primary text-white' 
+      : 'hover:bg-base-300 hover:font-semibold dark:hover:bg-base-700'
+  }`}>
+    <Link to={to} className='flex justify-start items-center'>
+      {icon}
+      <p className={`text-sm font-pop ${
+        currentPath === to 
+          ? 'text-white' 
+          : 'text-gray-700 dark:text-gray-200'
+      }`}>
+        {text}
+      </p>
+    </Link>
+  </div>
+);
 
 export default SellerNav;
