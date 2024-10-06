@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Camera } from "lucide-react";
 import { Link } from "react-router-dom";
+import ARViewer from "./ARViewer";
 
 const ProductPage = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -95,46 +96,13 @@ const ProductPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/2 mb-8 md:mb-0">
-          <div 
-            ref={containerRef}
-            className="relative overflow-hidden rounded-lg shadow-lg h-[400px] w-[400px] mx-auto"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-          >
-            <div 
-              className={`w-full h-full transition-transform duration-300 ease-in-out ${is3DMode ? 'cursor-move' : ''}`}
-              style={{
-                transform: is3DMode ? `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` : 'none',
-                transformStyle: 'preserve-3d',
-              }}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
-                style={{
-                  backfaceVisibility: 'hidden',
-                }}
-              />
-            </div>
-            <div className="absolute bottom-4 left-4 space-x-2">
-              <button
-                onClick={toggle3DMode}
-                className={`bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none ${
-                  is3DMode ? "text-blue-500" : ""
-                }`}
-                aria-label="Toggle 3D mode"
-              >
-                3D
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="md:w-1/2 md:pl-8">
+    <ARViewer />
+        <div className="w-full" style={{width:'190%'}}>
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={()=>window.location.href="consumer/product/ar"}>
+            View AR
+          </button>
+
           <div className="flex items-center mb-4">
             <div className="flex mr-2">{renderStars(product.rating)}</div>
             <span className="text-gray-600">{product.reviews} reviews</span>
