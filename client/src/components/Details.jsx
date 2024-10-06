@@ -50,13 +50,13 @@ const ProfessionalDetails = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className={`w-full max-w-lg bg-white shadow-2xl rounded-2xl overflow-hidden transition-all duration-1000 ease-out transform ${showForm ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+    <div className="min-h-screen flex justify-center items-center  p-4">
+      <div className={`w-full max-w-lg bg-base shadow-2xl rounded-2xl overflow-hidden transition-all duration-1000 ease-out transform ${showForm ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
         <div className="p-8">
           <div className="space-y-2 mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 animate-fadeIn">Customer Information</h2>
-            <p className="text-sm text-gray-600 animate-fadeIn animation-delay-200">Please provide the following details</p>
-            <div className="w-full bg-gray-200 rounded-full h-1.5 mt-4">
+            <h2 className="text-3xl font-bold text-base-content-800 animate-fadeIn">Customer Information</h2>
+            <p className="text-sm text-base-content-600 animate-fadeIn animation-delay-200">Please provide the following details</p>
+            <div className="w-full bg-base-200 rounded-full h-1.5 mt-4">
               <div 
                 className="bg-blue-600 h-1.5 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${formProgress}%` }}
@@ -119,7 +119,7 @@ const ProfessionalDetails = () => {
                     />
                   )}
                   <field.icon className={`absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors duration-300 ${
-                    focusedField === index ? 'text-blue-500' : 'text-gray-400'
+                    focusedField === index ? 'text-blue-500' : 'text-base-content-400'
                   }`} size={18} />
                   {field.validation && field.value && (
                     field.validation(field.value) 
@@ -134,7 +134,7 @@ const ProfessionalDetails = () => {
             ))}
             <button
               type="submit"
-              className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 ${
+              className={`w-full bg-base-600 hover:bg-blue-700 text-base-content font-semibold py-3 px-4 rounded-lg transition-all duration-300 ${
                 formProgress === 100 ? 'animate-pulse' : 'opacity-50 cursor-not-allowed'
               } flex justify-center items-center animate-fadeIn animation-delay-800`}
               disabled={isLoading || formProgress !== 100}

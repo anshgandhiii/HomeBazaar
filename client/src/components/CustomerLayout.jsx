@@ -2,6 +2,7 @@ import React from 'react';
 import { Search, ShoppingCart, User, Menu } from 'lucide-react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ThemeToggler from './Theme';
 
 const categories = ['Handicrafts', 'Food', 'Toys', 'Fashion', 'Accessories', 'Furniture', 'Other'];
 
@@ -30,18 +31,19 @@ const Header = () => (
       <Link to="profile" className="mr-4 cursor-pointer">
         <User className="cursor-pointer" />
       </Link>
+      <ThemeToggler/>
       </div>
     </div>
   </header>
 );
 
 const CategoryNav = () => (
-  <nav className="bg-gray-100 p-4">
+  <nav className="bg-base-100 p-4">
     <div className="container mx-auto">
       <ul className="flex justify-between overflow-x-auto">
         {categories.map((category) => (
           <li key={category} className="mx-2 whitespace-nowrap">
-            <a href="#" className="text-gray-700 hover:text-blue-600">{category}</a>
+            <a href="#" className="text-base-700 hover:text-base-600">{category}</a>
           </li>
         ))}
       </ul>

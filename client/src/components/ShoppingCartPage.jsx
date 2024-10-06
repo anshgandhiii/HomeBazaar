@@ -34,13 +34,13 @@ const ShoppingCartPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-lg">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800">Your Shopping Cart</h1>
+      <h1 className="text-3xl font-bold mb-8 text-base-content-800">Your Shopping Cart</h1>
       
       {cartItems.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-lg shadow-inner">
-          <ShoppingBag className="mx-auto mb-4 text-gray-400" size={64} />
-          <p className="text-2xl text-gray-600 mb-4">Your cart is empty</p>
-          <Button className="bg-blue-500 text-white hover:bg-blue-600 transform hover:scale-105">
+        <div className="text-center py-16 bg-base rounded-lg shadow-inner">
+          <ShoppingBag className="mx-auto mb-4 text-base-content-400" size={64} />
+          <p className="text-2xl text-base-content-600 mb-4">Your cart is empty</p>
+          <Button className="bg-blue-500 text-base-content hover:bg-blue-600 transform hover:scale-105">
             Continue Shopping
           </Button>
         </div>
@@ -48,11 +48,11 @@ const ShoppingCartPage = () => {
         <>
           <div className="space-y-6">
             {cartItems.map((item) => (
-              <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-lg">
-                <div className="flex items-center space-x-4">
+              <div key={item.id} className="flex items-center justify-between bg-base-content p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-lg">
+                <div className="flex items-center space-x-4 ">
                   <img src={`/api/placeholder/80/80`} alt={item.name} className="w-20 h-20 object-cover rounded-md" />
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
+                    <h3 className="text-lg font-semibold text-blue-900">{item.name}</h3>
                     <p className="text-blue-500 font-medium">${item.price.toFixed(2)}</p>
                   </div>
                 </div>
@@ -60,14 +60,14 @@ const ShoppingCartPage = () => {
                   <div className="flex items-center">
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)} 
-                      className="bg-gray-200 text-gray-600 hover:bg-gray-300 w-8 h-8 flex items-center justify-center rounded-l-md text-xl font-bold"
+                      className="bg-base-200 text-base-600 hover:bg-base-300 w-8 h-8 flex items-center justify-center rounded-l-md text-xl font-bold"
                     >
                       −
                     </button>
-                    <span className="w-10 text-center font-medium bg-gray-100">{item.quantity}</span>
+                    <span className="w-10 text-center font-medium bg-base-100">{item.quantity}</span>
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity + 1)} 
-                      className="bg-gray-200 text-gray-600 hover:bg-gray-300 w-8 h-8 flex items-center justify-center rounded-r-md text-xl font-bold"
+                      className="bg-base-200 text-base-content-600 hover:bg-base-300 w-8 h-8 flex items-center justify-center rounded-r-md text-xl font-bold"
                     >
                       +
                     </button>
@@ -83,17 +83,17 @@ const ShoppingCartPage = () => {
             ))}
           </div>
 
-          <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+          <div className="mt-8 bg-base p-6 rounded-lg shadow-md">
             <div className="space-y-4">
               <div className="flex justify-between text-gray-600">
                 <span>Subtotal:</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600">
+              <div className="flex justify-between text-base-content-600">
                 <span>Tax (10%):</span>
                 <span>${tax.toFixed(2)}</span>
               </div>
-              <div className="h-px bg-gray-200"></div>
+              <div className="h-px bg-base-200"></div>
               <div className="flex justify-between text-xl font-bold text-gray-800">
                 <span>Total:</span>
                 <span>${total.toFixed(2)}</span>
@@ -102,7 +102,7 @@ const ShoppingCartPage = () => {
           </div>
             
           <Link to="/consumer/payment">
-            <Button className="w-full mt-8 bg-blue-500 text-white hover:bg-blue-600 text-lg font-semibold py-3 rounded-lg transform transition duration-200 hover:scale-105 flex items-center justify-center">
+            <Button className="w-full mt-8 bg-blue-500 text-base-content hover:bg-blue-600 text-lg font-semibold py-3 rounded-lg transform transition duration-200 hover:scale-105 flex items-center justify-center">
                 Proceed to Checkout
                 <ArrowRight className="ml-2" size={20} />
             </Button>
