@@ -74,7 +74,7 @@ const FinalPaymentPage = () => {
       const result = await Swal.fire({
         icon: 'success',
         title: 'Payment Successful',
-        text: 'You will be notified shortly.',
+        text: 'Your order has been placed successfully. You will be notified when your order is out for delivery.',
       });
 
       if (result.isConfirmed) {
@@ -222,7 +222,7 @@ const FinalPaymentPage = () => {
                 />
                 {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>} {/* Error message */}
               </div>
-              <Button type="submit" className="bg-blue-500 w-full">Pay Now</Button>
+              <Button type="submit" className="bg-blue-500 text-white w-full">Pay Now</Button>
             </form>
             <div className="flex items-center mt-4 text-sm text-base-content-500">
               <AlertCircle className="w-4 h-4 mr-2" />

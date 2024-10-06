@@ -68,19 +68,24 @@ function CustomerHeader() {
   );
 }
 
+// Update the CategoryNav component in the Navbar file
+
 const CategoryNav = () => (
   <nav className="bg-base-100 p-4">
     <div className="container mx-auto">
       <ul className="flex justify-between overflow-x-auto">
         {categories.map((category) => (
           <li key={category} className="mx-2 whitespace-nowrap">
-            <a href="#" className="text-base-700 hover:text-base-600">{category}</a>
+            <Link to={category.toLowerCase()} className="text-base-700 hover:text-base-600">
+              {category}
+            </Link>
           </li>
         ))}
       </ul>
     </div>
   </nav>
 );
+
 
 const Navbar = () => (
   <>

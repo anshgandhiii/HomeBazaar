@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { User, Mail, Phone, MapPin, Edit2, Save, Coins } from 'lucide-react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Input = ({ label, value, onChange, icon: Icon, placeholder, readOnly = false }) => (
   <div className="relative">
@@ -41,35 +42,26 @@ const UserProfilePage = () => {
     email: '',
     phone: '',
     location: '',
-    coins: '0', // New field to store the number of coins
+    coins: '500',
   });
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Use useNavigate
 
-  // Fetch user profile using useEffect
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = Cookies.get('access_token'); // Get access token from cookies
+        const token = Cookies.get('access_token');
         const response = await axios.get('http://127.0.0.1:8000/api/user/profile/', {
           headers: {
-            Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
+            Authorization: `Bearer ${token}`,
           },
         });
-        const userId = response.data.id;
-
-        // Fetch consumer data by user ID
-        // const consumerResponse = await axios.get(`http://127.0.0.1:8000/api/user/consumer/${userId}/`, {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
-        //   },
-        // });
-        
         setUser({
           name: response.data.name,
           email: response.data.email,
-          phone: response.data.phone_number, // Fetch consumer-specific data
+          phone: response.data.phone_number,
           location: response.data.shipping_address,
-          coins: response.data.coins, // Fetch coins value from the API
+          coins: "500",
         });
         setLoading(false);
       } catch (error) {
@@ -82,7 +74,7 @@ const UserProfilePage = () => {
   }, []);
 
   const handleChange = (field) => (e) => {
-    if (field === 'phone' && e.target.value.length > 10) return; // restrict to 10 digits
+    if (field === 'phone' && e.target.value.length > 10) return;
     setUser({ ...user, [field]: e.target.value });
   };
 
@@ -90,22 +82,19 @@ const UserProfilePage = () => {
     setIsEditing(!isEditing);
   };
 
-  // Function to handle saving the updated user profile data
   const saveUserData = async () => {
     try {
-      const token = Cookies.get('access_token'); // Get the token
+      const token = Cookies.get('access_token');
       const updatedData = {
         name: user.name,
         email: user.email,
-        phone_number: user.phone, // Match with your consumer model field
-        shipping_address: user.location, // Match with your consumer model field
+        phone_number: user.phone,
+        shipping_address: user.location,
       };
-      console.log(updatedData.phone_number)
 
-      // Send a POST request with updated data to the server
       await axios.post('http://127.0.0.1:8000/api/user/consumers/', updatedData, {
         headers: {
-          Authorization: `Bearer ${token}`, // Authorization with Bearer token
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -116,6 +105,10 @@ const UserProfilePage = () => {
     }
   };
 
+  const claimRewards = () => {
+    navigate('/consumer/rewards'); // Redirect to rewards page
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -123,15 +116,10 @@ const UserProfilePage = () => {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-base rounded-xl shadow-lg">
       <div className="flex justify-between items-center mb-8">
-        {/* <h1 className="text-3xl font-bold text-base-content-800">User Profile</h1> */}
-        {/* <Button onClick={isEditing ? saveUserData : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
-          {isEditing ? 'Save Changes' : 'Edit Profile'}
-        </Button> */}
         <h1 className="text-3xl font-bold text-white-800">User Profile</h1>
-        <Button onClick={isEditing ? saveChanges : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
-  {isEditing ? 'Save Changes' : 'Edit Profile'}
-</Button>  {/* Ensure this is properly closed */}
-
+        <Button onClick={isEditing ? saveUserData : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
+          {isEditing ? 'Save Changes' : 'Edit Profile'}
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -139,7 +127,6 @@ const UserProfilePage = () => {
           <div className="text-center mb-6">
             <h2 className="text-xl font-semibold text-base-content-800">{user.name}</h2>
             <p className="text-base-content-500">{user.location}</p>
-            {/* Coins display under the user's name */}
             <div className="flex justify-center items-center mt-4">
               <Coins className="text-yellow-500 mr-2" size={20} />
               <span className="text-lg font-medium text-base-content-700">{user.coins} Coins</span>
@@ -177,6 +164,13 @@ const UserProfilePage = () => {
             placeholder=""
           />
         </div>
+      </div>
+
+      {/* Claim Rewards Button */}
+      <div className="text-white mt-8">
+        <Button onClick={claimRewards} icon={Coins} primary>
+          Claim Rewards
+        </Button>
       </div>
     </div>
   );
