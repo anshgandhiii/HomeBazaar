@@ -18,7 +18,7 @@ const Input = ({ className, ...props }) => (
 );
 const Button = ({ className, children, ...props }) => (
   <button
-    className={`p-2 rounded-md text-white ${className}`}
+    className={`p-2 rounded-md text-base-base-content ${className}`}
     {...props}
   >
     {children}
@@ -133,14 +133,14 @@ const FinalPaymentPage = () => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Checkout</h2>
           <div className="flex items-center">
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-2">1</div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold mr-2">1</div>
             <div className="w-16 h-1 bg-gray-300 mr-2"></div>
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-2">2</div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold mr-2">2</div>
             <div className="w-16 h-1 bg-gray-300 mr-2"></div>
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold">3</div>
           </div>
         </div>
-        <p className="text-gray-600">Please review your order and complete the payment.</p>
+        <p className="text-base-content-600">Please review your order and complete the payment.</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -224,6 +224,10 @@ const FinalPaymentPage = () => {
               </div>
               <Button type="submit" className="bg-blue-500 w-full">Pay Now</Button>
             </form>
+            <div className="flex items-center mt-4 text-sm text-base-content-500">
+              <AlertCircle className="w-4 h-4 mr-2" />
+              <span>Your payment information is secure and encrypted</span>
+            </div>
           </CardContent>
         </Card>
       </div>
