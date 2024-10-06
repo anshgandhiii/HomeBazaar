@@ -9,7 +9,7 @@ from rest_framework import serializers
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-from .models import Consumer,Order,Product
+from .models import Consumer,Product
 from .serializers import ConsumerSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
@@ -77,7 +77,7 @@ class UserLoginView(APIView):
     
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         serializer = UserProfileSerializer(request.user)
@@ -115,12 +115,13 @@ class UserPasswordResetView(APIView):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
         
 class ConsumerViewSet(viewsets.ModelViewSet):
     queryset = Consumer.objects.all()
     serializer_class = ConsumerSerializer
+    permission_classes = [IsAuthenticated]  
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)  
@@ -128,6 +129,7 @@ class ConsumerViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
+        
 class RewardsViewSet(viewsets.ModelViewSet):
     queryset = Rewards.objects.all()
     serializer_class = RewardsSerializer

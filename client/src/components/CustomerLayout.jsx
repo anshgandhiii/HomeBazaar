@@ -20,7 +20,7 @@ function Header() {
           <Menu className="mr-4 cursor-pointer md:hidden" />
 
           {/* Brand / Logo */}
-          <Link to="/home" className="mr-4 cursor-pointer">
+          <Link to="home" className="mr-4 cursor-pointer">
             <h1 className="text-2xl font-bold">MyShop</h1>
           </Link>
 
@@ -42,10 +42,10 @@ function Header() {
 
         {/* Cart and Profile Links */}
         <div className="flex items-center">
-          <Link to="/cart" className="mr-4 cursor-pointer">
+          <Link to="cart" className="mr-4 cursor-pointer">
             <ShoppingCart />
           </Link>
-          <Link to="/profile" className="cursor-pointer">
+          <Link to="profile" className="cursor-pointer">
             <User />
           </Link>
         </div>

@@ -60,7 +60,7 @@ function App() {
           <Route path="/consumer" element={<CustomerLayout/>}>
             <Route path="home" element={<Home />} />
             <Route path="details" element={<Details/>} />
-            {/* <Route path="rewards" element={<Rewards/>} /> */}
+            <Route path="rewards" element={<Rewards/>} />
             {/* <Route path="home" element={<Freq />} /> */}
             <Route path="product" element={<Product/>}></Route>
             <Route path="product/ar" element={<AR/>}></Route>
