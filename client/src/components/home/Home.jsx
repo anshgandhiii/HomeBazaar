@@ -24,11 +24,11 @@ const frequentlyBoughtProducts = [
 ];
 
 const HeroBanner = () => (
-  <div className="bg-gray-200 py-12">
+  <div className="bg-base-200 py-12">
     <div className="container mx-auto text-center">
       <h2 className="text-4xl font-bold mb-4">Summer Sale Up to 50% Off</h2>
       <p className="mb-6">Discover amazing deals on all your favorite products!</p>
-      <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+      <button className="bg-base-600 text-base-content px-6 py-2 rounded hover:bg-base-700">
         Shop Now
       </button>
     </div>
@@ -36,13 +36,13 @@ const HeroBanner = () => (
 );
 
 const ProductCard = ({ product }) => (
-  <div className="bg-white p-4 rounded shadow">
+  <div className="bg-base p-4 rounded shadow">
     <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4" />
     <h3 className="font-semibold mb-2">{product.name}</h3>
-    <p className="text-gray-600">${product.price.toFixed(2)}</p>
+    <p className="text-base-content-600">${product.price.toFixed(2)}</p>
     <Link 
       to="/consumer/product" 
-      className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full text-center inline-block">
+      className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-base-700 w-full text-center inline-block">
       Buy
   </Link>
 
@@ -63,7 +63,7 @@ const FeaturedProducts = () => (
 );
 
 const RecommendedCategories = () => (
-  <section className="py-12 bg-gray-100">
+  <section className="py-12 bg-base-100">
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-6">Recommended Categories</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -72,10 +72,10 @@ const RecommendedCategories = () => (
             <Link to="/consumer/category">
           <img src={category.image} alt={category.name} className="w-full h-48 object-cover transition duration-300 group-hover:scale-110" />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <h3 className="text-white text-xl font-semibold">{category.name}</h3>
+              <h3 className="text-base-content text-xl font-semibold">{category.name}</h3>
             </div>
-            <div className="absolute bottom-4 right-4 bg-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition duration-300">
-              <ChevronRight className="w-6 h-6 text-blue-600" />
+            <div className="absolute bottom-4 right-4 bg-base rounded-full p-2 opacity-0 group-hover:opacity-100 transition duration-300">
+              <ChevronRight className="w-6 h-6 text-base-600" />
             </div>
             </Link>
           </div>
@@ -94,7 +94,7 @@ const FrequentlyBoughtProducts = () => (
           <div key={product.id} className="flex-shrink-0 w-40">
             <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-md mb-2" />
             <h3 className="font-semibold text-sm mb-1 truncate">{product.name}</h3>
-            <p className="text-gray-600 text-sm">${product.price.toFixed(2)}</p>
+            <p className="text-base-content-600 text-sm">${product.price.toFixed(2)}</p>
           </div>
         ))}
       </div>

@@ -4,15 +4,8 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {
-      colors: {
-        primary: '#20cfff',
-        dark:'rgb(15 16 18)',
-        secondary:'gray',
-        'dark-gradient': 'linear-gradient(90deg, #1e3a8a 0%, #312e81 100%)',
-      },
-    },
+  daisyui: {
+    themes: ["light", "dark"],
   },
   plugins: [
     require('daisyui'),

@@ -99,7 +99,7 @@ const ProductPage = () => {
     <ARViewer />
         <div className="w-full" style={{width:'190%'}}>
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={()=>window.location.href="consumer/product/ar"}>
+          <button className="bg-blue-500 text-base-content p-2 rounded-lg" onClick={()=>window.location.href="consumer/product/ar"}>
             View AR
           </button>
 
@@ -166,7 +166,7 @@ const ProductPage = () => {
           </div>
           <div className="flex space-x-4 mb-6">
             <Link to="../cart"
-            className={`flex-1 py-3 px-6 rounded-md text-white font-semibold transition duration-200 ${isAddedToCart ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"}`}
+            className={`flex-1 py-3 px-6 rounded-md text-base-content font-semibold transition duration-200 ${isAddedToCart ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"}`}
             onClick={handleAddToCart}
             disabled={isAddedToCart}
             >
@@ -186,7 +186,7 @@ const ProductPage = () => {
               <span className="block sm:inline"> {error}</span>
             </div>
           )}
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-base-content-600">
             Availability: <span className="font-semibold text-green-600">{product.availability}</span>
           </p>
         </div>
