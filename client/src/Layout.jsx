@@ -11,7 +11,7 @@ const Layout = () => {
       {/* You can add a different nav for customers as needed */}
 
       {/* Theme toggler component */}
-      <div className="flex justify-end p-4 bg-gray-100 dark:bg-gray-900">
+      <div className="flex justify-end p-4 bg-base-100 dark:bg-base-900">
         <ThemeToggler />
       </div>
 
