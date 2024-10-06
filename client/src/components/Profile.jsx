@@ -47,7 +47,7 @@ const UserProfilePage = () => {
     fetch('http://127.0.0.1:8000/api/user/profile/', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('user')}`, // Ensure user is authenticated
+        'Authorization': `Bearer ${localStorage.getItem('user')}`,
         'Content-Type': 'application/json'
       }
     })
@@ -55,7 +55,7 @@ const UserProfilePage = () => {
       .then(data => {
         if (!data.error) {
           setUser({
-            name: data.user.name, // Assuming you are fetching the user name here
+            name: data.user.name, 
             email: data.user.email,
             phone: data.phone_number,
             location: data.shipping_address,
@@ -80,7 +80,7 @@ const UserProfilePage = () => {
     fetch('http://127.0.0.1:8000/api/user/consumer/', {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ensure user is authenticated
+        'Authorization': `Bearer ${document.cookie.accesss('token')}`, // Ensure user is authenticated
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

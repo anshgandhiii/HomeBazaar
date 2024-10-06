@@ -37,12 +37,9 @@ function Login() {
             setSuccessMessage('Login successful');
             console.log('Login successful:', data);
             alert("Login successful!");
-    
-            // Store user data in localStorage
-            console.log(response.token);
-            const token  = {
+            const userInfo  = {
                 email: data.email,
-                role: data.role  // Assuming role is 'consumer' or 'other'
+                role: data.role 
             };
             localStorage.setItem('user', JSON.stringify(userInfo));
     
