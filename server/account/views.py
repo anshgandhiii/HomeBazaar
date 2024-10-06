@@ -129,6 +129,25 @@ class ConsumerViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
+class ConsumerDetailView(APIView):
+    def get(self, request, id):
+        try:
+            # Query Consumer model based on the user foreign key
+            consumer = Consumer.objects.get(user__id=id)
+            print(consumer)
+            return Response({
+                'id': consumer.id,
+                'shipping_address': consumer.shipping_address,
+                'phone_number': consumer.phone_number,
+                'age': consumer.age,
+                'gender': consumer.gender,
+                'coins': consumer.coins,
+                'created_at': consumer.created_at,
+                'updated_at': consumer.updated_at,
+                'user': consumer.user.id
+            }, status=status.HTTP_200_OK)
+        except Consumer.DoesNotExist:
+            return Response({'error': 'Consumer not found'}, status=status.HTTP_404_NOT_FOUND)
         
 class RewardsViewSet(viewsets.ModelViewSet):
     queryset = Rewards.objects.all()

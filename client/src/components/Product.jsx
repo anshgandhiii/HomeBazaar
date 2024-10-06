@@ -99,7 +99,7 @@ const ProductPage = () => {
     <ARViewer />
         <div className="w-full" style={{width:'190%'}}>
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <button className="bg-blue-500 text-base-content p-2 rounded-lg" onClick={()=>window.location.href="consumer/product/ar"}>
+          <button className="bg-blue-500 text-base-content p-2 rounded-lg" onClick={()=>window.location.href="consumer/product/ar"}></button>
           <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={()=>window.location.href="product/ar"}>
             View AR
           </button>

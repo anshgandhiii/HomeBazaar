@@ -1,9 +1,6 @@
 import React from 'react';
-import { Search, ShoppingCart, User, Menu } from 'lucide-react';
-import { Outlet } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import ThemeToggler from './Theme';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, ShoppingCart, User, Menu, BinocularsIcon } from 'lucide-react';
 import { Outlet, Link } from 'react-router-dom';
 import Translate from '../Translate';
@@ -40,7 +37,7 @@ const Header = () => (
     </div>
   </header>
 );
-function Header() { 
+function CustomerHeader() { 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
