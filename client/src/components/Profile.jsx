@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { User, Mail, Phone, MapPin, Edit2, Save } from 'lucide-react';
 
 const Input = ({ label, value, onChange, icon: Icon, placeholder }) => (
@@ -32,42 +32,14 @@ const Button = ({ onClick, children, icon: Icon, primary = false }) => (
 const UserProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    location: '',
-    age: '',
-    gender: '',
-    state: ''
+    name: 'Amit Sharma',
+    email: 'amit.sharma@example.com',
+    phone: '9876543210',
+    location: 'Mumbai, India',
   });
 
-  useEffect(() => {
-    // Fetch consumer profile data
-    console.log(localStorage.getItem('user'))
-    fetch('http://127.0.0.1:8000/api/user/profile/', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('user')}`, // Ensure user is authenticated
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (!data.error) {
-          setUser({
-            name: data.user.name, // Assuming you are fetching the user name here
-            email: data.user.email,
-            phone: data.phone_number,
-            location: data.shipping_address,
-            age: data.age,
-            gender: data.gender,
-            state: data.state
-          });
-        }
-      });
-  }, []);
-
   const handleChange = (field) => (e) => {
+    if (field === 'phone' && e.target.value.length > 10) return; // restrict to 10 digits
     setUser({ ...user, [field]: e.target.value });
   };
 
@@ -76,35 +48,16 @@ const UserProfilePage = () => {
   };
 
   const saveChanges = () => {
-    // Save the updated profile data
-    fetch('http://127.0.0.1:8000/api/user/consumer/', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ensure user is authenticated
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        phone_number: user.phone,
-        shipping_address: user.location,
-        age: user.age,
-        gender: user.gender,
-        state: user.state
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (!data.error) {
-          console.log('Profile updated successfully:', data);
-          setIsEditing(false);
-        } else {
-          console.error('Error updating profile:', data);
-        }
-      });
+    // Normally, save the data to a server
+    console.log('Saving user data:', user);
+    setIsEditing(false);
   };
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-base rounded-xl shadow-lg">
       <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800">User Profile</h1>
+        <Button onClick={toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
         <h1 className="text-3xl font-bold text-base-content-800">User Profile</h1>
         <Button onClick={isEditing ? saveChanges : toggleEdit} icon={isEditing ? Save : Edit2} primary={isEditing}>
           {isEditing ? 'Save Changes' : 'Edit Profile'}
@@ -126,7 +79,6 @@ const UserProfilePage = () => {
             onChange={handleChange('name')}
             icon={User}
             placeholder="Amit Sharma"
-            disabled
           />
           <Input
             label="Email"
@@ -134,7 +86,6 @@ const UserProfilePage = () => {
             onChange={handleChange('email')}
             icon={Mail}
             placeholder="amit.sharma@example.com"
-            disabled
           />
           <Input
             label="Phone"
