@@ -19,7 +19,7 @@ const SellerNav = () => {
         <div className="flex flex-col justify-center space-y-[-6px]">
           <div className="flex items-center">
             <Atom className='h-6 text-primary mr-2' />
-            <h1 className="text-xl font-semibold font-pop text-primary mb-1 text-center">MarketNest</h1>
+            <h1 className="text-xl font-semibold font-pop text-primary mb-1 text-center">HomeBazaar</h1>
           </div>
         </div>
       </Link>
@@ -34,7 +34,7 @@ const SellerNav = () => {
 
         {/* Translate Button */}
         <div className="w-[85%] py-2 px-4 rounded-lg transition duration-100 hover:bg-base-300 hover:font-semibold dark:hover:bg-base-700">
-          <button onClick={toggleModal} className='flex justify-start items-center w-full text-gray-700 dark:text-gray-200'>
+          <button onClick={toggleModal} className='flex justify-start items-center w-full text-base-content dark:text-gray-200'>
             <BinocularsIcon className="h-4 w-4 mr-2" />
             <p className="text-sm font-pop">Translate</p>
           </button>
@@ -71,7 +71,7 @@ const NavItem = ({ to, icon, text, currentPath }) => (
       <p className={`text-sm font-pop ${
         currentPath === to 
           ? 'text-white' 
-          : 'text-gray-700 dark:text-gray-200'
+          : 'text-base-content dark:text-gray-200'
       }`}>
         {text}
       </p>
