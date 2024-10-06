@@ -7,6 +7,7 @@
 # npm i react-csv
 # npm install @react-three/fiber @use-gesture/react three @react-three/fiber @react-three/drei
 # npm i framer-motion
+# npm i js-cookie
 
 
 # pip install django-cors-headers
