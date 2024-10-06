@@ -35,6 +35,32 @@ const PaymentPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Reset errors
+    setErrors({
+      cardNumber: '',
+      expiryDate: '',
+      cvv: '',
+      name: '',
+    });
+
+    // Validate card details
+    const validationErrors = validateCardDetails(cardNumber, expiryDate, cvv, name);
+    if (validationErrors) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setLoading(true); // Show loading screen
+
+    // Simulate payment processing delay
+    setTimeout(async () => {
+      // Show success popup
+      const result = await Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful',
+        text: 'Your order has been placed successfully. You will be notified when your order is out for delivery.',
+
     
     // Validate payment details (simple validation for demonstration)
     if (!paymentDetails.name || !paymentDetails.cardNumber || !paymentDetails.expiryDate || !paymentDetails.cvv) {
@@ -42,6 +68,7 @@ const PaymentPage = () => {
         icon: 'error',
         title: 'Oops...',
         text: 'Please fill in all fields!',
+
       });
       return;
     }
@@ -117,6 +144,13 @@ const PaymentPage = () => {
                   required
                 />
               </div>
+
+              <Button type="submit" className="bg-blue-500 text-white w-full">Pay Now</Button>
+            </form>
+            <div className="flex items-center mt-4 text-sm text-base-content-500">
+              <AlertCircle className="w-4 h-4 mr-2" />
+              <span>Your payment information is secure and encrypted</span>
+
             </div>
           </div>
 

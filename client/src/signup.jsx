@@ -150,7 +150,7 @@ function Signup() {
           {/* Signup Button */}
           <button
             type="submit"
-            className="w-full bg-slate-950 text-base-content px-4 py-2 rounded mt-4"
+            className="w-full bg-slate-950 text-white px-4 py-2 rounded mt-4"
             disabled={isLoading}
           >
             {isLoading ? 'Signing Up...' : 'Sign Up'}
