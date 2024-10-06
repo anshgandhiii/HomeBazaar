@@ -46,7 +46,7 @@ function Signup() {
       console.log('Registration successful:', data);
       alert("Registration successful!");
       // Redirect or navigate after successful signup
-      // window.location.href="/home";
+      window.location.href="/login";
 
     } catch (error) {
       console.error('Error:', error);
