@@ -3,13 +3,10 @@
 # npm install lucide-react
 # npm install react-360-view
 # npm install @react-three/drei
-<<<<<<< HEAD
 # npm install @react-three/fiber
 # npm i react-csv
-=======
 # npm install @react-three/fiber @use-gesture/react three @react-three/fiber @react-three/drei
->>>>>>> 2b7eaff29604601bb9d276f44df736d082c2752e
-
+# npm i framer-motion
 
 
 # pip install django-cors-headers

@@ -21,6 +21,8 @@ import FinalPaymentPage from './components/FinalPaymentPage';
 import ShoppingCartPage from './components/ShoppingCartPage';
 import UserProfilePage from './components/Profile';
 import CategoryPage from './components/Category';
+import AR from './components/AR';
+import Landingpage from './Landingpage';
 // import Rewards from './components/Rewards'
 
 
@@ -61,6 +63,7 @@ function App() {
             {/* <Route path="rewards" element={<Rewards/>} /> */}
             {/* <Route path="home" element={<Freq />} /> */}
             <Route path="product" element={<Product/>}></Route>
+            <Route path="product/ar" element={<AR/>}></Route>
             <Route path="payment" element={<FinalPaymentPage/>}></Route>
             <Route path="cart" element={<ShoppingCartPage/>}></Route>
             <Route path="profile" element={<UserProfilePage/>}></Route>
@@ -71,6 +74,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Landingpage />} />
           
 
           {/* Seller Routes with Layout */}
