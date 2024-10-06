@@ -59,7 +59,7 @@ const Landingpage = () => {
                 {/* 360 Degree Product Showcase */}
                 <div className="mt-12 relative">
                     <motion.img
-                        src="/path-to-product-image.jpg" // Replace with actual image
+                        src="" // Replace with actual image
                         className="w-80 h-80 object-cover rounded-lg shadow-lg"
                         initial={{ scale: 1.2, rotate: 0 }}
                         animate={{ scale: 1, rotate: 360 }}
