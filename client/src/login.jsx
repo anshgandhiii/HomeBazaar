@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'; 
 import { useState } from 'react';
 
 function Login() {
@@ -28,19 +29,29 @@ function Login() {
                 body: JSON.stringify(userData),
             });
     
-            if (!response.ok) {
-                alert("Login unsuccessful");
-                throw new Error('Network response was not ok');
-            }
+            // if (!response.ok) {
+            //     alert("Login unsuccessful");
+            //     throw new Error('Network response was not ok');
+            // }
     
             const data = await response.json();
             setSuccessMessage('Login successful');
             console.log('Login successful:', data);
             alert("Login successful!");
+    
+            // Store the access token in a cookie
+            const accessToken = data.token.access;
+            Cookies.set('access_token', accessToken, {
+                expires: 1,  // Cookie will expire in 1 day
+                secure: true,  // Ensures cookie is sent over HTTPS
+                sameSite: 'strict',  // Prevents CSRF attacks
+            });
+    
             const userInfo  = {
                 email: data.email,
                 role: data.role 
             };
+            // You can store user information in localStorage if needed
             // localStorage.setItem('user', JSON.stringify(userInfo));
     
             // Check if profile is complete
