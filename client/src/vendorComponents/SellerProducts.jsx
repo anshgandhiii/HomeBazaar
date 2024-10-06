@@ -6,73 +6,6 @@ import Cookies from "js-cookie"
 
 
 
-
-// Simulated product data
-const initialProducts = [
-    { 
-        id: 1, 
-        name: 'Handmade Soap', 
-        price: 8.99, 
-        stock: 50, 
-        category: 'Beauty', 
-        image: 'https://images.unsplash.com/photo-1542038335240-86aea625b913?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        metaTitle: 'Organic Handmade Soap | Natural Beauty',
-        metaDescription: 'Experience the luxury of our handmade organic soap. Gentle on skin, rich in lather, and made with all-natural ingredients.',
-        tags: ['organic', 'handmade', 'soap', 'natural beauty'],
-        metaKeywords: 'organic soap, handmade soap, natural beauty products'
-      },
-      { 
-        id: 2, 
-        name: 'Handmade Soap', 
-        price: 8.99, 
-        stock: 50, 
-        category: 'Beauty', 
-        image: 'https://images.unsplash.com/photo-1542038335240-86aea625b913?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        metaTitle: 'Organic Handmade Soap | Natural Beauty',
-        metaDescription: 'Experience the luxury of our handmade organic soap. Gentle on skin, rich in lather, and made with all-natural ingredients.',
-        tags: ['organic', 'handmade', 'soap', 'natural beauty'],
-        metaKeywords: 'organic soap, handmade soap, natural beauty products'
-      },
-      { 
-        id: 3, 
-        name: 'Handmade Soap', 
-        price: 8.99, 
-        stock: 50, 
-        category: 'Beauty', 
-        image: 'https://images.unsplash.com/photo-1542038335240-86aea625b913?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        metaTitle: 'Organic Handmade Soap | Natural Beauty',
-        metaDescription: 'Experience the luxury of our handmade organic soap. Gentle on skin, rich in lather, and made with all-natural ingredients.',
-        tags: ['organic', 'handmade', 'soap', 'natural beauty'],
-        metaKeywords: 'organic soap, handmade soap, natural beauty products'
-      },
-];
-
-const ProductCard = ({ product, onEdit, onDelete }) => (
-  <div className="bg-[#20232A] rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-    <div className="relative">
-      <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
-      <div className="absolute top-0 right-0 bg-primary text-base-content px-2 py-1 m-2 rounded-full text-xs font-bold">
-        {product.category}
-      </div>
-    </div>
-    <div className="p-4">
-      <h3 className="text-xl font-semibold text-primary">{product.name}</h3>
-      <div className="mt-2 flex justify-between items-center">
-        <p className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</p>
-        <p className="text-sm text-base-content-600 bg-base-200 px-2 py-1 rounded-full">Stock: {product.stock}</p>
-      </div>
-      <div className="mt-4 flex justify-end space-x-2">
-        <button onClick={() => onEdit(product)} className="text-primary hover:text-gray-600 transition duration-300">
-          <Edit size={20} />
-        </button>
-        <button onClick={() => onDelete(product.id)} className="text-red-500 hover:text-red-700 transition duration-300">
-          <Trash2 size={20} />
-        </button>
-      </div>
-    </div>
-  </div>
-);
-
 const ProductForm = ({ product, onSave, onCancel }) => {
     const [formData, setFormData] = useState(product || { 
       name: '', 
@@ -216,13 +149,13 @@ const ProductForm = ({ product, onSave, onCancel }) => {
       };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-base p-6 rounded-lg shadow-lg">
+    <form onSubmit={handleSubmit} className="space-y-4 bg-dark p-6 rounded-lg shadow-lg">
       <input
         name="name"
         value={formData.name}
         onChange={handleChange}
         placeholder="Product Name"
-        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -231,7 +164,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.price}
         onChange={handleChange}
         placeholder="Price"
-        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -240,7 +173,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.life_span}
         onChange={handleChange}
         placeholder="Stock"
-        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -248,7 +181,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.category}
         onChange={handleChange}
         placeholder="Category"
-        className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       
@@ -260,7 +193,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         <button 
             type="button" 
             onClick={handleGenerateClickforTitle}
-            className="p-1 text-primary rounded-lg hover:bg-base-200 transition duration-300"
+            className="p-1 text-primary rounded-lg hover:bg-gray-200 transition duration-300"
           >
            {loadingGenforTitle ? 'Generating...' : 'Generate through AI?'}
           </button>
@@ -271,7 +204,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
             value={formData.metaTitle}
             onChange={handleChange}
             placeholder="Meta Tag Title"
-            className="flex-grow p-3 border bg-base-700 border-base-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="flex-grow p-3 border bg-gray-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             maxLength={50}
           />
           
@@ -285,7 +218,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         <button 
             type="button" 
             onClick={handleGenerateClick}
-            className="p-1 text-primary rounded-lg hover:bg-base-200 transition duration-300"
+            className="p-1 text-primary rounded-lg hover:bg-gray-200 transition duration-300"
           >
             {loadingGen ? 'Generating...' : 'Generate through AI?'}
           </button>
@@ -296,7 +229,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
             value={formData.metaDescription}
             onChange={handleChange}
             placeholder="Meta Tag Description"
-            className="flex-grow p-3 border bg-base-700 border-base-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="flex-grow p-3 border bg-gray-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             maxLength={250}
             rows={3}
           />
@@ -312,7 +245,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           value={formData.metaKeywords}
           onChange={handleChange}
           placeholder="Meta Tag Keywords"
-          className="w-full p-3 border bg-base-700 border-base-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+          className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         />
       </div>
 
@@ -324,8 +257,6 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           onChange={handleChange}
           placeholder="for carbon footprint"
           className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-          placeholder="Meta Tag Keywords"
-          className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         />
       </div>
 
@@ -333,7 +264,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
       <div className="flex justify-end space-x-2">
         <button type="button" onClick={onCancel} className="px-6 py-3 bg-gray-200 text-primary rounded-lg hover:bg-gray-300 transition duration-300">Cancel</button>
-        <button type="submit" className="px-6 py-3 bg-indigo-600 text-base rounded-lg hover:bg-indigo-700 transition duration-300">Save</button>
+        <button type="submit" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300">Save</button>
       </div>
     </form>
   );
@@ -384,7 +315,7 @@ const SellerProducts = () => {
   
     return (
       <div 
-        className={`rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 ${isEcoFriendly ? 'bg-green-500' : 'bg-[#20232A]'}`}
+        className={`rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 ${isEcoFriendly ? 'bg-green-500' : 'bg-base'}`}
       >
         <div className="relative">
           <img 
@@ -392,13 +323,13 @@ const SellerProducts = () => {
             alt={product.name} 
             className="w-full h-48 object-cover" 
           />
-          <div className="absolute top-0 right-0 bg-primary text-white px-2 py-1 m-2 rounded-full text-xs font-bold">
+          <div className="absolute top-0 right-0 bg-primary text-base-content px-2 py-1 m-2 rounded-full text-xs font-bold">
             {product.category}
           </div>
         </div>
         <div className="p-4">
           <h3 className="text-xl font-semibold text-primary">{product.name}</h3>
-          <span className='text-white'>Manufacturer: {product.manufacturer}</span>
+          <span className='text-base-content'>Manufacturer: {product.manufacturer}</span>
           <div className="mt-2 flex justify-between items-center">
             <p className="text-sm text-primary bg-dark px-2 py-1 rounded-full">
               Life Span: {product.life_span} months
@@ -453,7 +384,7 @@ const SellerProducts = () => {
           <ProductForm product={currentProduct} onSave={handleSave} onCancel={() => setIsEditing(false)} />
         ) : (
           <>
-            <button onClick={handleAddNew} className="mb-8 flex items-center text-primary px-6 py-3 rounded-lg hover:bg-base-600 transition duration-300 shadow-md">
+            <button onClick={handleAddNew} className="mb-8 flex items-center text-primary px-6 py-3 rounded-lg hover:bg-gray-600 transition duration-300 shadow-md">
               <Plus size={24} className="mr-2" /> Add New Product
             </button>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
