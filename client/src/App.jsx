@@ -22,7 +22,8 @@ import ShoppingCartPage from './components/ShoppingCartPage';
 import UserProfilePage from './components/Profile';
 import CategoryPage from './components/Category';
 import AR from './components/AR';
-import Landingpage from './Landingpage';
+import Landingpage from './LandingPage';
+import HandicraftsPage from './components/HandicraftsPage';
 // import Rewards from './components/Rewards'
 
 
@@ -59,6 +60,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/consumer" element={<CustomerLayout/>}>
             <Route path="home" element={<Home />} />
+            <Route path="handicrafts" element={<HandicraftsPage />} />
             <Route path="details" element={<Details/>} />
             <Route path="rewards" element={<Rewards/>} />
             {/* <Route path="home" element={<Freq />} /> */}
