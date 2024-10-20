@@ -36,7 +36,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           name: formData.name,
           manufacturer: formData.manufacturer || "Product name",
           ingredients: formData.ingredients || "Pure soap",
-          life_span: formData.life_span || "12 months",
+          life_span: formData.life_span || 12,
           price: formData.price || "100.00",
           offers: formData.offers || null,
           category: formData.category || "other",
@@ -155,7 +155,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.name}
         onChange={handleChange}
         placeholder="Product Name"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       <input
@@ -164,24 +164,24 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={formData.price}
         onChange={handleChange}
         placeholder="Price"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
-      <input
+      {/* <input
         name="life_span"
         type="number"
         value={formData.life_span}
         onChange={handleChange}
         placeholder="Stock"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
-      />
+      /> */}
       <input
         name="category"
         value={formData.category}
         onChange={handleChange}
         placeholder="Category"
-        className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+        className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         required
       />
       
@@ -204,7 +204,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
             value={formData.metaTitle}
             onChange={handleChange}
             placeholder="Meta Tag Title"
-            className="flex-grow p-3 border bg-gray-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="flex-grow p-3 border bg-base-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             maxLength={50}
           />
           
@@ -229,7 +229,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
             value={formData.metaDescription}
             onChange={handleChange}
             placeholder="Meta Tag Description"
-            className="flex-grow p-3 border bg-gray-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+            className="flex-grow p-3 border bg-base-700 border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             maxLength={250}
             rows={3}
           />
@@ -245,18 +245,19 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           value={formData.metaKeywords}
           onChange={handleChange}
           placeholder="Meta Tag Keywords"
-          className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+          className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-primary p-1">Lifecycle of product</label>
+        <label className="block text-sm font-medium text-primary p-1">Lifecycle of product in *months*</label>
         <input
           name="life_span"
+          type="number"
           value={formData.life_span}
           onChange={handleChange}
           placeholder="for carbon footprint"
-          className="w-full p-3 border bg-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+          className="w-full p-3 border bg-base-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
         />
       </div>
 
@@ -315,7 +316,7 @@ const SellerProducts = () => {
   
     return (
       <div 
-        className={`rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 ${isEcoFriendly ? 'bg-green-500' : 'bg-base'}`}
+        className={`rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 ${isEcoFriendly ? 'bg-green-900' : 'bg-base'}`}
       >
         <div className="relative">
           <img 

@@ -1,24 +1,11 @@
 import React, { useState } from 'react';
 import { AlertCircle, CreditCard, Calendar, User } from 'lucide-react';
-import Swal from 'sweetalert2'; // Import SweetAlert2
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-// Simple UI component definitions
-const Card = ({ children, className }) => (
-  <div className={`bg-white shadow-md rounded-lg ${className}`}>{children}</div>
-);
-const CardHeader = ({ children }) => <div className="p-4 border-b">{children}</div>;
-const CardTitle = ({ children }) => <h3 className="text-lg font-semibold">{children}</h3>;
-const CardContent = ({ children }) => <div className="p-4">{children}</div>;
-const Input = ({ className, ...props }) => (
-  <input
-    className={`w-full p-2 border rounded-md ${className}`}
-    {...props}
-  />
-);
 const Button = ({ className, children, ...props }) => (
   <button
-    className={`p-2 rounded-md text-base-base-content ${className}`}
+    className={`px-4 py-2 rounded-md transition duration-200 ease-in-out ${className}`}
     {...props}
   >
     {children}
@@ -31,24 +18,22 @@ const LoadingScreen = () => (
   </div>
 );
 
-const FinalPaymentPage = () => {
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [name, setName] = useState('');
-  const [loading, setLoading] = useState(false); // New loading state
-
-  // State variables for error messages
-  const [errors, setErrors] = useState({
+const PaymentPage = () => {
+  const [paymentDetails, setPaymentDetails] = useState({
+    name: '',
     cardNumber: '',
     expiryDate: '',
     cvv: '',
-    name: '',
   });
+  
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentDetails((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Reset errors
@@ -75,36 +60,17 @@ const FinalPaymentPage = () => {
         icon: 'success',
         title: 'Payment Successful',
         text: 'Your order has been placed successfully. You will be notified when your order is out for delivery.',
+
+    
+    // Validate payment details (simple validation for demonstration)
+    if (!paymentDetails.name || !paymentDetails.cardNumber || !paymentDetails.expiryDate || !paymentDetails.cvv) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill in all fields!',
+
       });
-
-      if (result.isConfirmed) {
-        // Redirect to home page after a slight delay
-        navigate('/consumer/home');
-      }
-      setLoading(false); // Hide loading screen
-    }, 3000); // Simulate processing time (3 seconds)
-  };
-
-  const validateCardDetails = (cardNumber, expiryDate, cvv, name) => {
-    const cardNumberPattern = /^\d{16}$/; // Adjust based on your card number length
-    const cvvPattern = /^\d{3}$/;
-
-    // Split MM/YY and validate
-    const [month, year] = expiryDate.split('/');
-    const expiryPattern = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/; // MM/YY format
-    const isValidExpiry = expiryPattern.test(expiryDate) && (
-        new Date(`20${year}`, month - 1) > new Date()
-    );
-
-    const errors = {};
-    if (!cardNumberPattern.test(cardNumber)) {
-        errors.cardNumber = 'Please enter a valid 16-digit card number.';
-    }
-    if (!isValidExpiry) {
-        errors.expiryDate = 'Please enter a valid expiration date in MM/YY format that is in the future.';
-    }
-    if (!cvvPattern.test(cvv)) {
-        errors.cvv = 'Please enter a valid 3-digit CVV.';
+      return;
     }
     // Check that the name contains only letters and spaces
     const namePattern = /^[A-Za-z\s]+$/; // Regex to allow only letters and spaces
@@ -159,80 +125,56 @@ const FinalPaymentPage = () => {
               <span>Total</span>
               <span>${orderDetails.total.toFixed(2)}</span>
             </div>
-          </CardContent>
-        </Card>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-base-content mb-1" htmlFor="expiryDate">Expiry Date</label>
+                <input 
+                  type="text" 
+                  id="expiryDate" 
+                  name="expiryDate" 
+                  value={paymentDetails.expiryDate} 
+                  onChange={handleChange} 
+                  className="w-full p-2 border border-base-300 rounded-md"
+                  placeholder="MM/YY"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-base-content mb-1" htmlFor="cvv">CVV</label>
+                <input 
+                  type="text" 
+                  id="cvv" 
+                  name="cvv" 
+                  value={paymentDetails.cvv} 
+                  onChange={handleChange} 
+                  className="w-full p-2 border border-base-300 rounded-md"
+                  placeholder="123"
+                  required
+                />
+              </div>
 
-        <Card className="md:order-1">
-          <CardHeader>
-            <CardTitle>Payment Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="relative">
-                <CreditCard className="absolute top-3 left-3 text-gray-400" size={20} />
-                <Input
-                  type="text"
-                  placeholder="Card Number"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                  required
-                  className="pl-10"
-                  pattern="\d{16}" // Accepts exactly 16 digits
-                  title="Please enter a valid 16-digit card number." // Error message on invalid input
-                />
-                {errors.cardNumber && <p className="text-red-500 text-sm">{errors.cardNumber}</p>} {/* Error message */}
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="relative">
-                  <Calendar className="absolute top-3 left-3 text-gray-400" size={20} />
-                  <Input
-                    type="text"
-                    placeholder="MM/YY"
-                    value={expiryDate}
-                    onChange={(e) => setExpiryDate(e.target.value)}
-                    required
-                    className="pl-10"
-                    pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$" // MM/YY format
-                    title="Please enter a valid expiration date in MM/YY format." // Error message on invalid input
-                  />
-                  {errors.expiryDate && <p className="text-red-500 text-sm">{errors.expiryDate}</p>} {/* Error message */}
-                </div>
-                <div className="relative">
-                  <Input
-                    type="text"
-                    placeholder="CVV"
-                    value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
-                    required
-                    pattern="\d{3}" // Accepts exactly 3 digits
-                    title="Please enter a valid 3-digit CVV." // Error message on invalid input
-                  />
-                  {errors.cvv && <p className="text-red-500 text-sm">{errors.cvv}</p>} {/* Error message */}
-                </div>
-              </div>
-              <div className="relative">
-                <User className="absolute top-3 left-3 text-gray-400" size={20} />
-                <Input
-                  type="text"
-                  placeholder="Cardholder Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className="pl-10"
-                />
-                {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>} {/* Error message */}
-              </div>
               <Button type="submit" className="bg-blue-500 text-white w-full">Pay Now</Button>
             </form>
             <div className="flex items-center mt-4 text-sm text-base-content-500">
               <AlertCircle className="w-4 h-4 mr-2" />
               <span>Your payment information is secure and encrypted</span>
+
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          <Button type="submit" className="mt-6 w-full bg-primary text-primary-content hover:bg-primary-focus">
+            Pay Now
+          </Button>
+        </form>
+      </Card>
+
+      {/* Additional Information */}
+      <div className="mt-6 text-base-content">
+        <AlertCircle size={24} className="inline mr-2" />
+        Your payment information is secure and will not be shared.
       </div>
     </div>
   );
 };
 
-export default FinalPaymentPage;
+export default PaymentPage;

@@ -21,7 +21,7 @@ function CustomerHeader() {
         <div className="flex items-center">
           <Menu className="mr-4 cursor-pointer md:hidden" />
           <Link to="home" className="mr-4 cursor-pointer">
-            <h1 className="text-2xl font-bold">MyShop</h1>
+            <h1 className="text-2xl font-bold">HomeBazaar</h1>
           </Link>
           {/* Translate Button */}
           <button onClick={toggleModal} className="flex justify-start items-center">

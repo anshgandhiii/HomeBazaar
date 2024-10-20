@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User, Mail, Phone, MapPin, Edit2, Save, Coins, LogOut, Home } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Edit2, Save, Coins, LogOut, Home } from 'lucide-react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -131,6 +132,7 @@ const UserProfilePage = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-base-200 rounded-xl shadow-lg">
+    <div className="max-w-4xl mx-auto mt-10 p-6 bg-base-200 rounded-xl shadow-lg">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-base-content">User Profile</h1>
         <div className="flex space-x-4">
@@ -162,6 +164,10 @@ const UserProfilePage = () => {
         </div>
 
         <div className="md:col-span-2 space-y-6">
+          <Input label="Full Name" value={user.name} onChange={handleChange('name')} icon={User} placeholder="Amit Sharma" />
+          <Input label="Email" value={user.email} onChange={handleChange('email')} icon={Mail} placeholder="" />
+          <Input label="Phone" value={user.phone} onChange={handleChange('phone')} icon={Phone} placeholder="" />
+          <Input label="Location" value={user.location} onChange={handleChange('location')} icon={MapPin} placeholder="" />
           <Input label="Full Name" value={user.name} onChange={handleChange('name')} icon={User} placeholder="Amit Sharma" />
           <Input label="Email" value={user.email} onChange={handleChange('email')} icon={Mail} placeholder="" />
           <Input label="Phone" value={user.phone} onChange={handleChange('phone')} icon={Phone} placeholder="" />

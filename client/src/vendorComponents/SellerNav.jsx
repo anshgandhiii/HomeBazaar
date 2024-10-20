@@ -20,6 +20,7 @@ const SellerNav = () => {
           <div className="flex items-center">
             <Atom className='h-6 text-primary mr-2' />
             <h1 className="text-xl font-semibold font-pop text-primary mb-1 text-center">HomeBazaar</h1>
+            <h1 className="text-xl font-semibold font-pop text-primary mb-1 text-center">HomeBazaar</h1>
           </div>
         </div>
       </Link>
