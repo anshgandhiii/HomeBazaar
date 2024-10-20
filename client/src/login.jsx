@@ -57,7 +57,7 @@ function Login() {
             // Check if profile is complete
             if (data.role === 'consumer' && !data.is_profile_complete) {
                 // Redirect to profile completion page
-                window.location.href = "/consumer/profile";
+                window.location.href = "/consumer/home";
             } else {
                 // Redirect to default dashboard
                 window.location.href = "/vendor/dashboard";

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import './Landingpage.css'; // Import Tailwind CSS styles
+import { Atom } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Landingpage = () => {
     const [theme, setTheme] = useState('dark');
@@ -15,12 +17,17 @@ const Landingpage = () => {
         <div className={`min-h-screen transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'bg-gradient-to-r from-gray-800 to-black' : 'bg-gradient-to-r from-purple-200 to-gray-100'} text-gray-900`}>
             {/* Header/Navbar */}
             <header className="flex justify-between items-center p-6 backdrop-blur-lg bg-opacity-30 rounded-lg shadow-lg">
-                <div className="text-3xl font-extrabold text-white">HomeVendor</div>
+                <div className="text-3xl font-extrabold text-white">
+                    <div className='flex items-center'>
+                    <Atom className='mr-2 text-primary'/>
+                    <h2 className='text-primary'>HomeBazaar</h2>
+                    </div>
+                    </div>
                 <nav className="space-x-6">
                     <a href="#features" className="text-white hover:text-primary transition duration-300">Features</a>
                     <a href="#products" className="text-white hover:text-primary transition duration-300">Products</a>
                     <a href="#contact" className="text-white hover:text-primary transition duration-300">Contact</a>
-                    <button className="bg-primary p-2 rounded-lg text-white">Get Started</button>
+                    <button className="bg-primary p-2 rounded-lg text-white" onClick={()=>window.location.href="/signup"}>Get Started</button>
                     <button className="ml-4" onClick={toggleTheme}>
                         {theme === 'light' ? <FiMoon size={24} color="white" /> : <FiSun size={24} color="primary" />}
                     </button>
@@ -46,17 +53,17 @@ const Landingpage = () => {
                     whileTap={{ scale: 0.9 }}
                     className="mt-8 btn btn-primary bg-primary text-white"
                 >
-                    Explore Now
+                    <Link to="/login">Explore Now</Link>
                 </motion.button>
 
                 {/* 360 Degree Product Showcase */}
-                <div className="mt-12 relative">
-                    <motion.img
-                        src="/path-to-product-image.jpg" // Replace with actual image
-                        className="w-80 h-80 object-cover rounded-lg shadow-lg"
+                <div className=" mt-12 relative">
+                    <motion.img 
+                        // src="" // Replace with actual image
+                        className="w-80 anurag h-80 object-cover rounded-lg shadow-lg"
                         initial={{ scale: 1.2, rotate: 0 }}
                         animate={{ scale: 1, rotate: 360 }}
-                        transition={{ duration: 3, repeat: Infinity }}
+                        transition={{ duration: 2, repeat: Infinity }}
                     />
                     <p className="mt-4 text-gray-300">Experience our products with a 360-degree view.</p>
                 </div>

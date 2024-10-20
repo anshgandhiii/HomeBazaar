@@ -1,14 +1,14 @@
 import React from 'react';
-import { ShoppingCart, Heart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const products = [
-  { id: 1, name: "Wireless Earbuds", price: 79.99, rating: 4.5, image: "/api/placeholder/300/200" },
-  { id: 2, name: "Smart Watch", price: 199.99, rating: 4.2, image: "/api/placeholder/300/200" },
-  { id: 3, name: "Bluetooth Speaker", price: 59.99, rating: 4.0, image: "/api/placeholder/300/200" },
-  { id: 4, name: "4K Action Camera", price: 129.99, rating: 4.7, image: "/api/placeholder/300/200" },
-  { id: 5, name: "Noise-Canceling Headphones", price: 249.99, rating: 4.8, image: "/api/placeholder/300/200" },
-  { id: 6, name: "Portable Charger", price: 39.99, rating: 4.4, image: "/api/placeholder/300/200" },
+  { id: 1, name: "Furniture", price: 79.99, rating: 4.5, image: "https://images.unsplash.com/photo-1612372606404-0ab33e7187ee?q=80&w=1878&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 2, name: "Smart Watch", price: 199.99, rating: 4.2, image: "https://plus.unsplash.com/premium_photo-1681504446264-708b83f4ea12?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 3, name: "Bluetooth Speaker", price: 59.99, rating: 4.0, image: "https://images.unsplash.com/photo-1620360643011-62ca208f4148?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 4, name: "Toy Car", price: 129.99, rating: 4.7, image: "https://images.unsplash.com/photo-1447931958677-954446df5f70?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 5, name: "Noise-Canceling Headphones", price: 249.99, rating: 4.8, image: "https://via.placeholder.com/300x200" },
+  { id: 6, name: "Portable Charger", price: 39.99, rating: 4.4, image: "https://via.placeholder.com/300x200" },
 ];
 
 const StarRating = ({ rating }) => {
@@ -45,13 +45,12 @@ const CategoryPage = () => {
               <StarRating rating={product.rating} />
             </div>
             <div className="flex justify-between p-4 bg-gray-50">
-            <Link to="/consumer/cart">
-  <button className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">
-    <ShoppingCart className="w-5 h-5 mr-2" />
-    Add to Cart
-  </button>
-</Link>
-
+              <Link to="/consumer/cart">
+                <button className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">
+                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  Add to Cart
+                </button>
+              </Link>
             </div>
           </div>
         ))}

@@ -26,7 +26,7 @@ const Button = ({ className, children, ...props }) => (
 );
 
 const LoadingScreen = () => (
-  <div className="flex items-center justify-center h-screen bg-gray-200">
+  <div className="flex items-center justify-center h-screen bg-base-200">
     <div className="loader">Loading...</div>
   </div>
 );
@@ -117,10 +117,10 @@ const FinalPaymentPage = () => {
 
   const orderDetails = {
     items: [
-      { name: 'Product 1', price: 19.99 },
-      { name: 'Product 2', price: 29.99 },
+      { name: 'Wooden Chair', price: 79.99 },
+      { name: 'Smart Watch', price: 199.99 },
     ],
-    total: 49.98,
+    total: 279.98,
   };
 
   if (loading) {
@@ -134,9 +134,9 @@ const FinalPaymentPage = () => {
           <h2 className="text-2xl font-bold">Checkout</h2>
           <div className="flex items-center">
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold mr-2">1</div>
-            <div className="w-16 h-1 bg-gray-300 mr-2"></div>
+            <div className="w-16 h-1 bg-base-300 mr-2"></div>
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold mr-2">2</div>
-            <div className="w-16 h-1 bg-gray-300 mr-2"></div>
+            <div className="w-16 h-1 bg-base-300 mr-2"></div>
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold">3</div>
           </div>
         </div>

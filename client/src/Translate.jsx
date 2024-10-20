@@ -141,12 +141,12 @@ const Translate = () => {
           <textarea
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            className="mt-1 block w-full sm:text-sm border border-base-content-300 rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10"
+            className="mt-1 block w-full sm:text-sm text-base-content border border-base-content-300 rounded-md p-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10"
             rows="4"
           ></textarea>
           <button
             onClick={toggleListening}
-            className="absolute right-2 bottom-2 p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200"
+            className="absolute right-2 bottom-2 p-2 rounded-full bg-indigo-100 text-base-content hover:bg-indigo-200"
           >
             {isListening ? <MicOff size={20} /> : <Mic size={20} />}
           </button>
@@ -155,7 +155,7 @@ const Translate = () => {
       <button
         onClick={handleTranslate}
         disabled={isLoading}
-        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-base-content bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         {isLoading ? 'Translating...' : 'Translate'}
       </button>
@@ -167,7 +167,7 @@ const Translate = () => {
       {outputText && (
         <div className="mt-4">
           <h2 className="text-xl font-semibold mb-2">Translation Result:</h2>
-          <p className="border border-base-content-300 rounded-md p-2">{outputText}</p>
+          <p className="border text-base-content border-base-content-300 rounded-md p-2">{outputText}</p>
         </div>
       )}
     </div>

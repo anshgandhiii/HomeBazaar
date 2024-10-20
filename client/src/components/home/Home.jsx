@@ -25,15 +25,33 @@ const frequentlyBoughtProducts = [
 ];
 
 const HeroBanner = () => (
-  <div className="bg-base-200 py-12">
-    <div className="container mx-auto text-center">
-      <h2 className="text-4xl font-bold mb-4">Summer Sale Up to 50% Off</h2>
-      <p className="mb-6">Discover amazing deals on all your favorite products!</p>
-      <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300">
-        Shop Now
-      </button>
-    </div>
+  <div className="relative bg-base-200 py-12">
+  {/* Blurred background image */}
+  <div
+    className="absolute inset-0"
+    style={{
+      backgroundImage: "url('https://images.unsplash.com/photo-1531265726475-52ad60219627?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJhY2tncm91bmQlMjBoYXBweSUyMGRlc2lnbnxlbnwwfHwwfHx8MA==')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      filter: "blur(4px)", // Blurring the background image only
+      WebkitFilter: "blur(4px)", // For better compatibility
+      zIndex: -1, // Ensure it's behind the text
+    }}
+  ></div>
+
+  {/* Dark overlay to make text more readable */}
+  <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
+
+  {/* Main content with text */}
+  <div className="container mx-auto text-center relative z-10">
+    <h2 className="text-4xl font-bold mb-4">Summer Sale Up to 50% Off</h2>
+    <p className="mb-6">Discover amazing deals on all your favorite products!</p>
+    <button className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300">
+      Shop Now
+    </button>
   </div>
+</div>
+
 );
 
 const ProductCard = ({ product }) => (
