@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertCircle, CreditCard, Calendar, User } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +25,8 @@ const PaymentPage = () => {
     expiryDate: '',
     cvv: '',
   });
-  
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,10 +34,21 @@ const PaymentPage = () => {
     setPaymentDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const validateCardDetails = (name, cardNumber, expiryDate, cvv) => {
+    let errors = {};
+    const namePattern = /^[A-Za-z\s]+$/;
+    
+    if (!namePattern.test(name)) {
+      errors.name = 'Please enter a valid name without numeric characters.';
+    }
+    // Additional validation can be added here for card number, expiry, etc.
+    
+    return Object.keys(errors).length > 0 ? errors : null;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Reset errors
     setErrors({
       cardNumber: '',
       expiryDate: '',
@@ -44,41 +56,28 @@ const PaymentPage = () => {
       name: '',
     });
 
-    // Validate card details
-    const validationErrors = validateCardDetails(cardNumber, expiryDate, cvv, name);
+    const { cardNumber, expiryDate, cvv, name } = paymentDetails;
+    const validationErrors = validateCardDetails(name, cardNumber, expiryDate, cvv);
+
     if (validationErrors) {
       setErrors(validationErrors);
       return;
     }
 
-    setLoading(true); // Show loading screen
+    setLoading(true);
 
     // Simulate payment processing delay
     setTimeout(async () => {
-      // Show success popup
-      const result = await Swal.fire({
+      setLoading(false);
+
+      await Swal.fire({
         icon: 'success',
         title: 'Payment Successful',
         text: 'Your order has been placed successfully. You will be notified when your order is out for delivery.',
-
-    
-    // Validate payment details (simple validation for demonstration)
-    if (!paymentDetails.name || !paymentDetails.cardNumber || !paymentDetails.expiryDate || !paymentDetails.cvv) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill in all fields!',
-
       });
-      return;
-    }
-    // Check that the name contains only letters and spaces
-    const namePattern = /^[A-Za-z\s]+$/; // Regex to allow only letters and spaces
-    if (!namePattern.test(name)) {
-        errors.name = 'Please enter a valid name without numeric characters.';
-    }
 
-    return Object.keys(errors).length > 0 ? errors : null;
+      navigate('/order-summary');
+    }, 2000);
   };
 
   const orderDetails = {
@@ -90,31 +89,21 @@ const PaymentPage = () => {
   };
 
   if (loading) {
-    return <LoadingScreen />; // Show loading screen while processing payment
+    return <LoadingScreen />;
   }
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-4">
       <div className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Checkout</h2>
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold mr-2">1</div>
-            <div className="w-16 h-1 bg-base-300 mr-2"></div>
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold mr-2">2</div>
-            <div className="w-16 h-1 bg-base-300 mr-2"></div>
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-base-content font-bold">3</div>
-          </div>
-        </div>
+        <h2 className="text-2xl font-bold">Checkout</h2>
         <p className="text-base-content-600">Please review your order and complete the payment.</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="md:order-2">
-          <CardHeader>
-            <CardTitle>Order Summary</CardTitle>
-          </CardHeader>
-          <CardContent>
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Order Summary */}
+          <div className="md:order-2">
+            <h3 className="text-xl font-bold mb-4">Order Summary</h3>
             {orderDetails.items.map((item, index) => (
               <div key={index} className="flex justify-between mb-2">
                 <span>{item.name}</span>
@@ -125,53 +114,46 @@ const PaymentPage = () => {
               <span>Total</span>
               <span>${orderDetails.total.toFixed(2)}</span>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-base-content mb-1" htmlFor="expiryDate">Expiry Date</label>
-                <input 
-                  type="text" 
-                  id="expiryDate" 
-                  name="expiryDate" 
-                  value={paymentDetails.expiryDate} 
-                  onChange={handleChange} 
-                  className="w-full p-2 border border-base-300 rounded-md"
-                  placeholder="MM/YY"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-base-content mb-1" htmlFor="cvv">CVV</label>
-                <input 
-                  type="text" 
-                  id="cvv" 
-                  name="cvv" 
-                  value={paymentDetails.cvv} 
-                  onChange={handleChange} 
-                  className="w-full p-2 border border-base-300 rounded-md"
-                  placeholder="123"
-                  required
-                />
-              </div>
-
-              <Button type="submit" className="bg-blue-500 text-white w-full">Pay Now</Button>
-            </form>
-            <div className="flex items-center mt-4 text-sm text-base-content-500">
-              <AlertCircle className="w-4 h-4 mr-2" />
-              <span>Your payment information is secure and encrypted</span>
-
-            </div>
           </div>
 
-          <Button type="submit" className="mt-6 w-full bg-primary text-primary-content hover:bg-primary-focus">
-            Pay Now
-          </Button>
-        </form>
-      </Card>
+          {/* Payment Form */}
+          <div>
+            <label className="block mb-1" htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={paymentDetails.name}
+              onChange={handleChange}
+              className="w-full p-2 border border-base-300 rounded-md"
+              placeholder="John Doe"
+              required
+            />
+            {errors.name && <p className="text-red-500">{errors.name}</p>}
 
-      {/* Additional Information */}
-      <div className="mt-6 text-base-content">
+            <label className="block mt-4 mb-1" htmlFor="cardNumber">Card Number</label>
+            <input
+              type="text"
+              id="cardNumber"
+              name="cardNumber"
+              value={paymentDetails.cardNumber}
+              onChange={handleChange}
+              className="w-full p-2 border border-base-300 rounded-md"
+              placeholder="1234 5678 9123 4567"
+              required
+            />
+            {/* Add more error handling and fields like CVV, expiry */}
+          </div>
+        </div>
+
+        <Button type="submit" className="mt-6 w-full bg-blue-500 text-white">
+          Pay Now
+        </Button>
+      </form>
+
+      <div className="mt-6 text-sm text-base-content">
         <AlertCircle size={24} className="inline mr-2" />
-        Your payment information is secure and will not be shared.
+        Your payment information is secure and encrypted.
       </div>
     </div>
   );
