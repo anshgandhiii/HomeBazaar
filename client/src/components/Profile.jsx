@@ -41,7 +41,7 @@ const UserProfilePage = () => {
     email: '',
     phone: '',
     location: '',
-    coins: '0', // New field to store the number of coins
+    coins: '0',
   });
   const [loading, setLoading] = useState(true);
 
@@ -54,12 +54,12 @@ const UserProfilePage = () => {
             Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
           },
         });
-        
         setUser({
           name: response.data.name,
           email: response.data.email,
           phone: response.data.phone_number,
           location: response.data.shipping_address,
+          coins: response.data.coins,
           coins: response.data.coins,
         });
         setLoading(false);
@@ -83,12 +83,12 @@ const UserProfilePage = () => {
 
   const saveUserData = async () => {
     try {
-      const token = Cookies.get('access_token'); // Get the token
+      const token = Cookies.get('access_token');
       if (!token) {
         console.error('No access token found.');
         return;
       }
-  
+
       const updatedData = {
         name: user.name,
         email: user.email,
@@ -108,21 +108,18 @@ const UserProfilePage = () => {
       console.error('Error saving user data:', error);
     }
   };
-  
-  // Function to handle logout
+
   const handleLogout = () => {
-    Cookies.remove('access_token'); // Remove the token
-    window.location.href = '/'; // Redirect to login page
+    Cookies.remove('access_token');
+    window.location.href = '/';
   };
 
-  // Function to redirect to home
   const goToHome = () => {
-    window.location.href = '/consumer/home'; // Redirect to home page
+    window.location.href = '/consumer/home';
   };
 
-  // Function to redirect to rewards page
   const goToRewards = () => {
-    window.location.href = '/consumer/rewards'; // Redirect to rewards page
+    window.location.href = '/consumer/rewards';
   };
 
   if (loading) {
@@ -132,10 +129,13 @@ const UserProfilePage = () => {
   return (
     <div className="max-w-4xl mx-auto mt-10 p-6 bg-base-200 rounded-xl shadow-lg">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-white">User Profile</h1>
+        <h1 className="text-3xl font-bold text-base-content">User Profile</h1>
         <div className="flex space-x-4">
           <Button onClick={goToHome} icon={Home} primary={false}>
             Home
+          </Button>
+          <Button onClick={goToRewards} icon={Coins} primary={false}>
+            Rewards
           </Button>
           <Button onClick={goToRewards} icon={Coins} primary={false}>
             Rewards
@@ -154,8 +154,11 @@ const UserProfilePage = () => {
           <div className="text-center mb-6">
             <h2 className="text-xl font-semibold text-base-content">{user.name}</h2>
             <p className="text-base-content">{user.location}</p>
+            <h2 className="text-xl font-semibold text-base-content">{user.name}</h2>
+            <p className="text-base-content">{user.location}</p>
             <div className="flex justify-center items-center mt-4">
               <Coins className="text-yellow-500 mr-2" size={20} />
+              <span className="text-lg font-medium text-base-content">{user.coins} Coins</span>
               <span className="text-lg font-medium text-base-content">{user.coins} Coins</span>
             </div>
           </div>

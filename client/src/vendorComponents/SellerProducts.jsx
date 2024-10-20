@@ -274,7 +274,7 @@ const SellerProducts = () => {
   
   const ProductCard = ({ product, onEdit, onDelete }) => {
     // Determine if the product is eco-friendly based on life_span
-    const isEcoFriendly = product.life_span <= 24;
+    const isEcoFriendly = product.life_span <= 12;
   
     return (
       <div 

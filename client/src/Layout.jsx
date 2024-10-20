@@ -14,8 +14,6 @@ const Layout = () => {
       <div className="flex justify-end p-4 bg-base-100 dark:bg-base-900">
         <ThemeToggler />
       </div>
-      {/* Theme toggler component */}
-      
 
       <main>
         <Outlet /> {/* This is where the child components will be rendered */}
