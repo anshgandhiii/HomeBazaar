@@ -62,24 +62,23 @@ const ShoppingCartPage = () => {
   };
 
   const updateQuantity = (id, newQuantity) => {
-    setCartItems(
-      cartItems.map((item) =>
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(0, newQuantity) } : item
       )
     );
   };
 
   const removeItem = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.1;
   const total = subtotal + tax;
 
-  // Calculate total eco-coins based on eco-friendly products
   const ecoCoins = cartItems.reduce((sum, item) => {
-    return sum + (item.ecoFriendly ? item.price * item.quantity * 0.05 : 0); // Earn coins for eco-friendly items
+    return sum + (item.ecoFriendly ? item.price * item.quantity * 0.05 : 0);
   }, 0);
 
   return (
@@ -90,13 +89,14 @@ const ShoppingCartPage = () => {
         <h2 className="text-xl font-semibold mb-4 text-base-content">Available Products</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {availableProducts.map((product) => (
-            <div key={product.id} className="bg-base-200 p-4 rounded-lg shadow-sm transition-transform transform hover:-translate-y-1">
+            <div
+              key={product.id}
+              className="bg-base-200 p-4 rounded-lg shadow-sm transition-transform transform hover:-translate-y-1"
+            >
               <img src={product.image} alt={product.name} className="w-full h-32 object-cover rounded-md mb-2" />
               <h3 className="font-semibold text-base-content">{product.name}</h3>
               <p className="text-base-content">${product.price.toFixed(2)}</p>
-              {product.ecoFriendly && (
-                <p className="text-green-500 font-medium">Eco-Friendly! 🌱</p>
-              )}
+              {product.ecoFriendly && <p className="text-green-500 font-medium">Eco-Friendly! 🌱</p>}
               <Button
                 onClick={() => addToCart(product)}
                 className="mt-2 w-full bg-primary text-primary-content hover:bg-primary-focus"
@@ -120,15 +120,13 @@ const ShoppingCartPage = () => {
         <>
           <div className="space-y-6">
             {cartItems.map((item) => (
-              <div key={item.id} className="flex items-center justify-between bg-base-200 p-4 rounded-lg shadow-md transition duration-300 ease-in-out hover:shadow-lg">
+              <div key={item.id} className="flex items-center justify-between bg-base-200 p-4 rounded-lg shadow-md">
                 <div className="flex items-center space-x-4">
                   <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-md" />
                   <div>
                     <h3 className="text-lg font-semibold text-base-content">{item.name}</h3>
                     <p className="text-primary font-medium">${item.price.toFixed(2)}</p>
-                    {item.ecoFriendly && (
-                      <span className="text-green-500 font-medium">Eco-Friendly! 🌱</span>
-                    )}
+                    {item.ecoFriendly && <span className="text-green-500 font-medium">Eco-Friendly! 🌱</span>}
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -161,7 +159,6 @@ const ShoppingCartPage = () => {
             ))}
           </div>
 
-          {/* Eco Coins Section */}
           {ecoCoins > 0 && (
             <div className="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-md">
               <h3 className="font-semibold">You earned Eco-Coins!</h3>
@@ -169,7 +166,6 @@ const ShoppingCartPage = () => {
             </div>
           )}
 
-          {/* Cart Summary */}
           <div className="mt-8 bg-base p-6 rounded-lg shadow-md">
             <div className="space-y-4">
               <div className="flex justify-between text-base-content">
@@ -186,15 +182,14 @@ const ShoppingCartPage = () => {
                 <span>${total.toFixed(2)}</span>
               </div>
             </div>
-          </div>
 
-          {/* Checkout Button */}
-          <Link to="/consumer/payment">
-            <Button className="w-full mt-8 bg-primary text-primary-content hover:bg-primary-focus text-lg font-semibold py-3 rounded-lg transform transition duration-200 hover:scale-105 flex items-center justify-center">
-              Proceed to Checkout
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
-          </Link>
+            <Link to="/consumer/payment">
+              <Button className="w-full mt-8 bg-primary text-primary-content hover:bg-primary-focus text-lg font-semibold py-3 rounded-lg transform transition duration-200 hover:scale-105 flex items-center justify-center">
+                Proceed to Checkout
+                <ArrowRight className="ml-2" size={20} />
+              </Button>
+            </Link>
+          </div>
         </>
       )}
     </div>

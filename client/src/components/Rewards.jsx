@@ -77,7 +77,7 @@ const RewardsPage = () => {
         <h2 className="text-2xl font-semibold">Total Coins: {totalCoins}</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-8">
         {rewards.map((reward) => (
           <motion.div
             key={reward.id}
