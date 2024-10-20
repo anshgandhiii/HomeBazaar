@@ -48,10 +48,10 @@ const UserProfilePage = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const token = Cookies.get('access_token');
+        const token = Cookies.get('access_token'); // Get access token from cookies
         const response = await axios.get('http://127.0.0.1:8000/api/user/profile/', {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // Add the Bearer token to the Authorization header
           },
         });
         setUser({
@@ -59,6 +59,7 @@ const UserProfilePage = () => {
           email: response.data.email,
           phone: response.data.phone_number,
           location: response.data.shipping_address,
+          coins: response.data.coins,
           coins: response.data.coins,
         });
         setLoading(false);
@@ -72,7 +73,7 @@ const UserProfilePage = () => {
   }, []);
 
   const handleChange = (field) => (e) => {
-    if (field === 'phone' && e.target.value.length > 10) return;
+    if (field === 'phone' && e.target.value.length > 10) return; // restrict to 10 digits
     setUser({ ...user, [field]: e.target.value });
   };
 
@@ -94,13 +95,13 @@ const UserProfilePage = () => {
         phone_number: user.phone,
         shipping_address: user.location,
       };
-
+  
       await axios.post('http://127.0.0.1:8000/api/user/consumers/', updatedData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       console.log('User data saved successfully');
       setIsEditing(false);
     } catch (error) {
@@ -136,6 +137,9 @@ const UserProfilePage = () => {
           <Button onClick={goToRewards} icon={Coins} primary={false}>
             Rewards
           </Button>
+          <Button onClick={goToRewards} icon={Coins} primary={false}>
+            Rewards
+          </Button>
           <Button onClick={handleLogout} icon={LogOut} primary={false}>
             Logout
           </Button>
@@ -150,8 +154,11 @@ const UserProfilePage = () => {
           <div className="text-center mb-6">
             <h2 className="text-xl font-semibold text-base-content">{user.name}</h2>
             <p className="text-base-content">{user.location}</p>
+            <h2 className="text-xl font-semibold text-base-content">{user.name}</h2>
+            <p className="text-base-content">{user.location}</p>
             <div className="flex justify-center items-center mt-4">
               <Coins className="text-yellow-500 mr-2" size={20} />
+              <span className="text-lg font-medium text-base-content">{user.coins} Coins</span>
               <span className="text-lg font-medium text-base-content">{user.coins} Coins</span>
             </div>
           </div>

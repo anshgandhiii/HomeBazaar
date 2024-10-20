@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Package } from 'lucide-react';
 import Cookies from "js-cookie"
@@ -7,28 +6,29 @@ import Cookies from "js-cookie"
 
 
 const ProductForm = ({ product, onSave, onCancel }) => {
-    const [formData, setFormData] = useState(product || { 
-      name: '', 
-      price: '', 
-      stock:'', 
-      category: '', 
-      image: '/api/placeholder/200/200',
-      metaTitle: '',
-      metaDescription: '',
-      tags: [],
-      metaKeywords: '',
-      life_span: '',
+    const [formData, setFormData] = useState(product || {
+        name: '',
+        price: '',
+        stock: '',
+        category: '',
+        image: '/api/placeholder/200/200',
+        metaTitle: '',
+        metaDescription: '',
+        tags: [],
+        metaKeywords: '',
+        life_span: '',
     });
-    const [loadingGen,setLoadingGen]=useState(false)
-    const [loadingGenforTitle,setLoadingGenforTitle]=useState(false)
-  
+    const [loadingGen, setLoadingGen] = useState(false);
+    const [loadingGenforTitle, setLoadingGenforTitle] = useState(false);
+
     const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData(prevData => ({
-        ...prevData,
-        [name]: name === 'tags' ? value.split(',').map(tag => tag.trim()) : value
-      }));
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: name === 'tags' ? value.split(',').map(tag => tag.trim()) : value
+        }));
     };
+
     const handleSubmit = async (e) => {
       e.preventDefault();
   
@@ -78,75 +78,37 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
     const handleGenerateClick = async () => {
         if (!formData.name) {
-          alert("Please enter a valid product name before generating meta description.");
-          return;
+            alert("Please enter a valid product name before generating meta description.");
+            return;
         }
         setLoadingGen(true);
         const generatedText = await generateAboutText(`Generate a SEO ranked Description for product: ${formData.name} in strictly less than 60 characters.`);
         
         if (generatedText) {
-          setFormData(prevData => ({
-            ...prevData,
-            metaDescription: generatedText
-          }));
+            setFormData(prevData => ({
+                ...prevData,
+                metaDescription: generatedText
+            }));
         }
-        console.log("done",generatedText);
-        
         setLoadingGen(false);
-      };
-
-      const generateAboutText = async (prompt) => {
-        try {
-          setLoadingGen(true);
-          const API_KEY = 'AIzaSyAMKjcnhLfkHbvBBYrvcuBngcizr0FLc8Q';
-          
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }],
-            }),
-          });
-      
-          // Check if the response is OK (status code in the range 200-299)
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-      
-          const data = await response.json(); // Parse JSON response
-          console.log("gemini", data);
-          
-          return data.candidates[0].content.parts[0].text; 
-        } catch (error) {
-          console.error("Error generating about text:", error);
-          return '';
-        } finally {
-          setLoadingGen(false); // Uncomment if you're using loading state
-        }
-      };
-      
+    };
 
     const handleGenerateClickforTitle = async () => {
         if (!formData.name) {
-          alert("Please enter a valid catalog name before generating meta description.")
-          return
+            alert("Please enter a valid catalog name before generating meta description.");
+            return;
         }
         setLoadingGenforTitle(true);
-        const generatedText = await generateAboutText(`Generate a SEO ranked title for product : ${formData.name} in strictly less than 25 characters.`);
+        const generatedText = await generateAboutText(`Generate a SEO ranked title for product: ${formData.name} in strictly less than 25 characters.`);
+        
         if (generatedText) {
             setFormData(prevData => ({
-              ...prevData,
-              metaTitle: generatedText
+                ...prevData,
+                metaTitle: generatedText
             }));
-            // alert("done")
-            
-          }
-          console.log("done",generatedText);
-          
+        }
         setLoadingGenforTitle(false);
-      };
+    };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 bg-dark p-6 rounded-lg shadow-lg">
@@ -340,8 +302,8 @@ const SellerProducts = () => {
             <button onClick={() => onEdit(product)} className="text-primary hover:text-gray-600 transition duration-300">
               <Edit /> Edit
             </button>
-            <button onClick={() => onDelete(product.id)} className="text-red-600 hover:text-red-800 transition duration-300">
-              <Trash2 /> Delete
+            <button type="button" onClick={onCancel} className="w-full py-3 px-4 bg-gray-600 hover:bg-gray-700 rounded-lg text-white transition duration-300">
+                Cancel
             </button>
           </div>
         </div>

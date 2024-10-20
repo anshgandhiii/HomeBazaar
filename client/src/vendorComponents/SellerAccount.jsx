@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Assuming you are using react-router for navigation
 import Swal from 'sweetalert2'; // Import SweetAlert2 for confirmation
+import { useNavigate } from 'react-router-dom'; // Assuming you are using react-router for navigation
+import Swal from 'sweetalert2'; // Import SweetAlert2 for confirmation
 
 const SellerAccount = () => {
   const [profileData, setProfileData] = useState({
@@ -14,6 +16,7 @@ const SellerAccount = () => {
 
   const [rewardPoints, setRewardPoints] = useState(320);  // Seller's current reward points
   const rewardMilestone = 500;  // Next reward milestone
+  const navigate = useNavigate(); // For navigation after logout
   const navigate = useNavigate(); // For navigation after logout
 
   // Handle form change
@@ -53,7 +56,37 @@ const SellerAccount = () => {
     });
   };
 
+  // Handle logout and remove the access_token cookie
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure you want to log out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, log out!',
+      cancelButtonText: 'No, stay logged in',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Remove the access_token cookie
+        document.cookie = 'access_token=; Max-Age=0; path=/; domain=' + window.location.hostname;
+
+        // Redirect to login page
+        navigate('/login'); // Assuming '/login' is the route for login
+      }
+    });
+  };
+
   return (
+    <div className="max-w-lg mx-auto p-6 bg-base-200 shadow-md rounded-lg relative">
+      {/* Logout Button */}
+      <div className="absolute top-0 right-0 m-4">
+        <button
+          onClick={handleLogout}
+          className="bg-primary hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg"
+        >
+          Logout
+        </button>
+      </div>
+
     <div className="max-w-lg mx-auto p-6 bg-base-200 shadow-md rounded-lg relative">
       {/* Logout Button */}
       <div className="absolute top-0 right-0 m-4">
@@ -184,4 +217,5 @@ const SellerAccount = () => {
   );
 };
 
+export default SellerAccount;
 export default SellerAccount;
