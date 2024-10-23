@@ -12,8 +12,8 @@ const SellerAccount = () => {
     businessLink: 'www.doesstore.com',
   });
 
-  const [rewardPoints, setRewardPoints] = useState(320);  // Seller's current reward points
-  const rewardMilestone = 500;  // Next reward milestone
+  const [rewardPoints, setRewardPoints] = useState(320); // Seller's current reward points
+  const rewardMilestone = 500; // Next reward milestone
   const navigate = useNavigate(); // For navigation after logout
 
   // Handle form change
@@ -66,7 +66,7 @@ const SellerAccount = () => {
       </div>
 
       {/* Reward Points Display */}
-      <div className="mb-6 bg-base-800 p-4 rounded-lg text-white text-center">
+      <div className="mb-6 bg-base-800 p-4 rounded-lg text-primary text-center">
         <h2 className="text-xl font-bold">Reward Points: {rewardPoints}</h2>
         <div className="w-full bg-base-500 rounded-full h-2 mb-4 mt-2">
           <div
@@ -74,10 +74,10 @@ const SellerAccount = () => {
             style={{ width: `${progressPercentage}%` }}
           ></div>
           <p className="text-sm p-1">
-          {rewardMilestone - rewardPoints > 0
-            ? `Only ${rewardMilestone - rewardPoints} points to your next reward!`
-            : 'Congratulations! You’ve reached your next reward milestone!'}
-        </p>
+            {rewardMilestone - rewardPoints > 0
+              ? `Only ${rewardMilestone - rewardPoints} points to your next reward!`
+              : 'Congratulations! You’ve reached your next reward milestone!'}
+          </p>
         </div>
       </div>
 
