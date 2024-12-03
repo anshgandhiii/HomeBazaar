@@ -12,7 +12,7 @@ export function Model(props) {
     useFrame(() => {
       if (modelRef.current) {
         // Rotate the model group around the Y-axis infinitely
-        modelRef.current.rotation.y += 0.002 // Adjust this value for faster/slower rotation
+        modelRef.current.rotation.y += 0.000 // Adjust this value for faster/slower rotation
       }
     })
   
