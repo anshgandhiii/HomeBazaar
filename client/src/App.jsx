@@ -24,6 +24,8 @@ import CategoryPage from './components/Category';
 import AR from './components/AR';
 import Landingpage from './LandingPage';
 import HandicraftsPage from './components/HandicraftsPage';
+import { Model } from './components/Model';
+import ViewModel from './components/ViewModel';
 // import Rewards from './components/Rewards'
 
 
@@ -65,7 +67,7 @@ function App() {
             <Route path="rewards" element={<Rewards/>} />
             {/* <Route path="home" element={<Freq />} /> */}
             <Route path="product" element={<Product/>}></Route>
-            <Route path="product/ar" element={<AR/>}></Route>
+            <Route path="product/ar" element={<ViewModel/>}></Route>
             <Route path="payment" element={<FinalPaymentPage/>}></Route>
             <Route path="cart" element={<ShoppingCartPage/>}></Route>
             <Route path="profile" element={<UserProfilePage/>}></Route>
